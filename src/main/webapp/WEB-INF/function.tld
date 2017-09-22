@@ -1,0 +1,15 @@
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+    <tlib-version>1.0</tlib-version>
+    <short-name>cf</short-name>
+    <uri>http://www.cizezsy.me/functions</uri>
+
+    <function>
+        <name>formatLocalDateTime</name>
+        <function-class>me.cizezsy.function.FormatLocalDateTime</function-class>
+        <function-signature>java.lang.String formatLocalDateTime(java.time.LocalDateTime,java.lang.String)
+        </function-signature>
+    </function>
+</taglib>

@@ -1,0 +1,25 @@
+<%@tag body-content="scriptless" dynamic-attributes="dynamicAttributes" trimDirectiveWhitespaces="true"
+       pageEncoding="utf-8" %>
+<%@attribute name="htmlTitle" type="java.lang.String" rtexprvalue="true" required="true" %>
+<%@attribute name="userViewBackgroundUrl" type="java.lang.String" rtexprvalue="true" required="false" %>
+<%@ attribute name="nav" fragment="true" required="true" %>
+<%@ attribute name="footer" fragment="true" required="true" %>
+<%@ include file="/WEB-INF/jsp/base.jsp" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <%@ include file="/WEB-INF/jsp/component/default-css-and-js.jsp" %>
+    <title><c:out value="${htmlTitle}"/></title>
+</head>
+<body>
+<header>
+    <jsp:invoke fragment="nav"/>
+</header>
+<main>
+    <jsp:doBody/>
+</main>
+<jsp:invoke fragment="footer"/>
+</body>
+</html>
