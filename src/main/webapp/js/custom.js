@@ -14,9 +14,7 @@ $(document).ready(function () {
     btnCps.sideNav();
     btnCps.show();
 
-
-
-    $(".color-thief-target").ready(function () {
+    $(".color-thief-target").$(".color-thief-target").ready(function () {
         var image = $(".color-thief-target")[0];
         var colorThief = new ColorThief();
         if (image) {

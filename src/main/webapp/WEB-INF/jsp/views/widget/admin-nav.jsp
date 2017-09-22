@@ -1,3 +1,8 @@
+<script>
+    $(document).ready(function () {
+        $("a:contains(" + $(document).title + ")").toggleClass("active");
+    })
+</script>
 <ul id="side-out" class="side-nav fixed z-depth-2">
     <li class="red lighten-2">
         <a href="javascript:void(0)" class="white-text">仪表盘</a>

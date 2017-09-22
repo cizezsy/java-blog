@@ -1,6 +1,7 @@
 <template:admin title="文章编辑" breadcrumpItems="${['仪表盘','文章管理','文章编辑']}">
     <script src="<c:url value="/js/showdown.min.js"/>"></script>
     <script async="async">
+
         $(document).ready(function () {
             var converter = new showdown.Converter();
             var preview = $("#markdown-preview");
@@ -10,44 +11,46 @@
             var editorAreaModal = $('#markdown-editor-textarea-modal');
             var previewModal = $("#markdown-preview-modal");
 
+            function heightAdapt() {
+                markdownDiv.height($(window).height() - markdownDiv.offset().top - 10);
+                markdownEditorDiv.height($(window).height() - markdownEditorDiv.offset().top - 10);
+            }
+
             $('.modal').modal({
                 dismissible: false,
                 startingTop: '2%',
                 endingTop: '5%',
                 ready: function () {
                     Materialize.toast('ESC键退出', 2000, 'rounded');
-                    $('html').bind("keyup.modals", function (e) {
+                    $('html').on("keyup.modals", function (e) {
                         if (e.keyCode !== 27) {
                             return false;
                         }
                         $('#modal1').modal("close");
-                        $('html').unbind("keyup.modals")
+                        $(this).off("keyup.modals")
                     });
                 }
             });
 
-            function heightAdapt() {
-                markdownDiv.height($(window).height() - markdownDiv.offset().top - 10);
-                markdownEditorDiv.height($(window).height() - markdownEditorDiv.offset().top - 10);
-            }
 
             heightAdapt();
 
-            var editor = $(".markdown-editor-textarea");
-            editor.val("");
-            editor.bind('input propertychange', function () {
-                var current = $(this)[0];
-                var value = current.value;
 
-                if ($(this).is(editorArea))
-                    editorAreaModal.val(value);
-                else
-                    editorArea.val(value);
+            $(".markdown-editor-textarea")
+                .val("")
+                .on('input propertychange', function () {
+                    var current = $(this)[0];
+                    var value = current.value;
 
-                var html = converter.makeHtml(value);
-                preview.html(html);
-                previewModal.html(html);
-            });
+                    if ($(this).is(editorArea))
+                        editorAreaModal.val(value);
+                    else
+                        editorArea.val(value);
+
+                    var html = converter.makeHtml(value);
+                    preview.html(html);
+                    previewModal.html(html);
+                });
 
             $(window).on('resize', function () {
                 heightAdapt();

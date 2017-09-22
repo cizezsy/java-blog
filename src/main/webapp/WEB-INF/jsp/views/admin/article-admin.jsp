@@ -39,7 +39,7 @@
                         <a href="#" class="admin-article-action">编辑</a>
                     </div>
                 </div>
-                <%--@elvariable id="articles" type="java.util.List<me.cizezsy.domain.Article>"--%>
+                    <%--@elvariable id="articles" type="java.util.List<me.cizezsy.domain.Article>"--%>
                 <c:forEach items="${articles}" var="article">
                     <div class="table-row">
                         <div class="table-cell">
@@ -62,10 +62,13 @@
         </div>
         <script>
             $(document).ready(function () {
+                var fadeTime = 1000;
                 $(".table-row").hover(function () {
                     $(this).addClass("table-hover");
                 }, function () {
                     $(this).removeClass("table-hover");
+                }).hide().fadeIn(fadeTime, function () {
+                    fadeTime += 1000;
                 })
             })
         </script>
