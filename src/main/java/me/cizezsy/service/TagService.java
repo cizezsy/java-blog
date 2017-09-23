@@ -23,7 +23,7 @@ public class TagService {
                 })
                 .collect(Collectors.toList());
         tags.forEach(t -> {
-            if (tagDao.findByExample(t) == null)
+            if (tagDao.findByExample(t).size() == 0)
                 tagDao.save(t);
         });
         return tags;

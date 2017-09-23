@@ -21,6 +21,8 @@ public class Article extends BaseDomain implements Comparable<Article> {
     private String articleTitle;
     @Column(name = "article_content")
     private String articleContent;
+    @Column(name = "article_raw_content")
+    private String articleRawContent;
     @Column(name = "article_abstract")
     private String articleAbstract;
     @Column(name = "create_time")
@@ -41,8 +43,8 @@ public class Article extends BaseDomain implements Comparable<Article> {
     private boolean isPublish = true;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "blog_article_tag" ,
-            joinColumns = {@JoinColumn(name="article_id")},
+    @JoinTable(name = "blog_article_tag",
+            joinColumns = {@JoinColumn(name = "article_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_name")})
     private List<Tag> tagList = new ArrayList<>();
 
@@ -141,6 +143,14 @@ public class Article extends BaseDomain implements Comparable<Article> {
 
     public void setTagList(List<Tag> tagList) {
         this.tagList = tagList;
+    }
+
+    public String getArticleRawContent() {
+        return articleRawContent;
+    }
+
+    public void setArticleRawContent(String articleRawContent) {
+        this.articleRawContent = articleRawContent;
     }
 
     @Override

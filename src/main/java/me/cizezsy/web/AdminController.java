@@ -8,6 +8,7 @@ import me.cizezsy.service.ArticleService;
 import me.cizezsy.service.TagService;
 import me.cizezsy.service.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,26 @@ public class AdminController {
         return "admin/article-admin-edit";
     }
 
-    @RequestMapping(value = "/article/edit", method = RequestMethod.POST, params = {"articleId", "articleTitle", "articleContent", "tag"})
-    public JsonMessage articlePost(String articleId, String articleTitle, String articleContent, String tag, Article article) {
+    @RequestMapping(value = "/article/edit", method = RequestMethod.GET, params = {"articleId"})
+    public String articleEdit(String articleId, Article article, Model model) {
+        article.setArticleId(UUID.fromString(articleId));
+        try {
+            article = articleService.findArticle(article);
+            model.addAttribute("article", article);
+            return "admin/article-admin-edit";
+        } catch (ArticleException e) {
+            return "error/404";
+        }
+    }
+
+    @RequestMapping(value = "/article/edit",
+            method = RequestMethod.POST,
+            params = {"articleId", "articleTitle", "articleContent", "tag", "articleRawContent"})
+    public JsonMessage articlePost(@RequestParam(name = "articleId") String articleId,
+                                   @RequestParam(name = "articleTitle") String articleTitle,
+                                   @RequestParam(name = "articleContent") String articleContent,
+                                   @RequestParam(name = "tag") String tag,
+                                   @RequestParam(name = "articleRawContent") String articleRawContent, Article article) {
         if (!StringUtils.isEmpty(articleId)) {
             article.setArticleId(UUID.fromString(articleId));
             try {
@@ -60,6 +79,7 @@ public class AdminController {
         }
         article.setArticleTitle(articleTitle);
         article.setArticleContent(articleContent);
+        article.setArticleRawContent(articleRawContent);
         article.setTagList(tagService.mapToTag(tag));
         //调试
         User user = userService.findAllUser().get(0);

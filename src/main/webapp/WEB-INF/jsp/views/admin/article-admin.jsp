@@ -54,7 +54,7 @@
                         <div class="table-cell">
                             <a href="#" class="admin-article-action">置顶</a>
                             <a href="#" class="admin-article-action">公布</a>
-                            <a href="#" class="admin-article-action">编辑</a>
+                            <a href="<c:url value="/admin/article/edit?articleId=${article.articleId}"/>" class="admin-article-action">编辑</a>
                         </div>
                     </div>
                 </c:forEach>
@@ -69,7 +69,7 @@
                     $(this).removeClass("table-hover");
                 }).hide().each(function () {
                     $(this).fadeIn(fadeTime);
-                    fadeTime+=1000;
+                    fadeTime += 1000;
                 })
             })
         </script>

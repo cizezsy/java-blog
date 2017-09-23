@@ -1,4 +1,5 @@
-<template:admin title="文章编辑" breadcrumpItems="${['仪表盘','文章管理','文章编辑']}">
+<template:admin title="文章编辑"
+                breadcrumpItems="${['仪表盘','文章管理','文章编辑']}"><%--@elvariable id="article" type="me.cizezsy.domain.Article"--%>
     <script src="<c:url value="/js/showdown.min.js"/>"></script>
     <script async="async">
 
@@ -103,7 +104,8 @@
 
             $("#publish").click(function () {
                 var articleTitle = $("#article-title-input").val();
-                var articleContent = $("#markdown-editor-textarea").val();
+                var articleContent = $("#markdown-preview").html();
+                var articleRawContent = $("#markdown-editor-textarea").val();
                 var articleId = $("#article-id").val();
                 var tag = [];
                 $(".chip .tag").each(function () {
@@ -116,9 +118,9 @@
                             'articleId': articleId,
                             'articleTitle': articleTitle,
                             'articleContent': articleContent,
-                            'tag': tag.join(',')
+                            'tag': tag.join(','),
+                            'articleRawContent': articleRawContent
                         },
-                        dataType: 'text',
                         success: submitResult
                     }
                 )
@@ -126,7 +128,7 @@
 
             function submitResult(result) {
                 var data = JSON.parse(result);
-                if(data.status === 200) {
+                if (data.status === 200) {
                     $("article-id").val(data.message);
                 } else {
                     Materialize.toast(data.message, 2000, 'rounded');
@@ -139,23 +141,35 @@
     <link rel="stylesheet" href="<c:url value="/css/markdown-editor.css"/>">
     <div class="container">
         <div class="input-field col s12">
-            <input id="article-id" type="hidden" name="article-id">
-            <input id="article-title-input" placeholder="标题" type="text">
+            <input id="article-id" type="hidden" name="article-id" value="${article.articleId}">
+            <input id="article-title-input" placeholder="标题" type="text" value="${article.articleTitle}">
         </div>
         <div class="flex-container" style="margin-bottom: 4px">
-            <div class="chip">
-                添加标签
-                <i class="icon material-icons">add</i>
-            </div>
+            <c:choose>
+                <c:when test="${fn:length(article.tagList) eq 0}">
+                    <div class="chip">
+                        添加标签
+                        <i class="icon material-icons">add</i>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${article.tagList}" var="tag">
+                        <div class="chip">
+                            <input type="text" maxlength="32" placeholder="标签名" class="tag" value="${tag.tagName}">
+                        </div>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
     <div id="markdown" class="markdown container row scale-transition">
         <div id="markdown-editor" class="markdown-editor col s6">
             <textarea id="markdown-editor-textarea" class="markdown-editor-textarea" title="markdown-editor-textarea"
                       placeholder="请输入markdown">
+                    ${article.articleRawContent}
             </textarea>
         </div>
-        <div id="markdown-preview" class="markdown-preview col m6"></div>
+        <div id="markdown-preview" class="markdown-preview col m6">${article.articleContent}</div>
     </div>
 
     <div class="fixed-action-btn">
