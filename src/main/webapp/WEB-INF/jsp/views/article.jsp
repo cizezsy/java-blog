@@ -8,10 +8,39 @@
         <%@include file="widget/front-footer.jsp" %>
     </jsp:attribute>
     <jsp:body>
+        <style>
+            .article-header-content {
+                position: relative;
+            }
 
+            .article-header, .article-header-content ::before {
+                background: url("/image/pexels-photo-424163.jpeg") 0 / cover fixed;
+            }
+
+            .article-header-content {
+                width: 80%;
+                margin: 0 auto;
+                position: relative;
+                background: hsla(0,0%,100%,.3);
+                overflow: hidden;
+                z-index: 1;
+            }
+
+            .article-header-content ::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: -1;
+                filter: blur(20px);
+                margin: -30px;
+            }
+        </style>
         <%--TODO 此处url以后改成动态--%>
-        <div class="article-header valign-wrapper" style="background-image: url('/image/pexels-photo-424163.jpeg')">
-            <div class="container">
+        <div class="article-header valign-wrapper">
+            <div class="container article-header-content">
                 <div class="article-header-title">
                     <h3 class="white-text">${article.articleTitle}</h3>
                 </div>

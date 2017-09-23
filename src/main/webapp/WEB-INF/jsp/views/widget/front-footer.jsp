@@ -1,3 +1,10 @@
+<style>
+    c {
+        position: relative;
+        background: hsla(0,0%,100%,.3);
+    }
+
+</style>
 <footer class="page-footer z-depth-3 grey-text text-lighten-2 imageColor">
     <div class="container">
         <div class="row">

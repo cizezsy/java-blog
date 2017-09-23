@@ -14,7 +14,7 @@ $(document).ready(function () {
     btnCps.sideNav();
     btnCps.show();
 
-    $(".color-thief-target").$(".color-thief-target").ready(function () {
+    function colorInit() {
         var image = $(".color-thief-target")[0];
         var colorThief = new ColorThief();
         if (image) {
@@ -23,11 +23,17 @@ $(document).ready(function () {
                 rule = "{border-left-color: rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ") !important;}";
             addGlobalCss(".border-left-main-image-color", rule);
             addGlobalCss(selector, rule);
-            addGlobalCss(".imageColor", "{background-color: rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ") !important;}")
+            addGlobalCss(".imageColor", "{background-color: rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ") !important;}");
             $(".table-of-contents a").hover(function () {
                 $(this).toggleClass("border-left-main-image-color")
             });
         }
+    }
+
+    $(".color-thief-target").one("load", function () {
+        colorInit();
+    }).each(function(){
+        this.complete && $(this).trigger('load');
     });
 
 });

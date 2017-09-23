@@ -104,6 +104,7 @@
             $("#publish").click(function () {
                 var articleTitle = $("#article-title-input").val();
                 var articleContent = $("#markdown-editor-textarea").val();
+                var articleId = $("#article-id").val();
                 var tag = [];
                 $(".chip .tag").each(function () {
                     tag.push($(this).val());
@@ -111,15 +112,25 @@
                 $.ajax({
                         url: '/admin/article/edit',
                         method: 'post',
-                        data: {'articleTitle': articleTitle, 'articleContent': articleContent, 'tag': tag.join(',')},
+                        data: {
+                            'articleId': articleId,
+                            'articleTitle': articleTitle,
+                            'articleContent': articleContent,
+                            'tag': tag.join(',')
+                        },
                         dataType: 'text',
-                        success: publicResult
+                        success: submitResult
                     }
                 )
             });
 
-            function publicResult() {
-
+            function submitResult(result) {
+                var data = JSON.parse(result);
+                if(data.status === 200) {
+                    $("article-id").val(data.message);
+                } else {
+                    Materialize.toast(data.message, 2000, 'rounded');
+                }
             }
         });
     </script>
@@ -128,6 +139,7 @@
     <link rel="stylesheet" href="<c:url value="/css/markdown-editor.css"/>">
     <div class="container">
         <div class="input-field col s12">
+            <input id="article-id" type="hidden" name="article-id">
             <input id="article-title-input" placeholder="标题" type="text">
         </div>
         <div class="flex-container" style="margin-bottom: 4px">

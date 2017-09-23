@@ -7,6 +7,7 @@ import me.cizezsy.exception.ArticleException;
 import me.cizezsy.service.ArticleService;
 import me.cizezsy.service.TagService;
 import me.cizezsy.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +47,17 @@ public class AdminController {
         return "admin/article-admin-edit";
     }
 
-    @RequestMapping(value = "/article/edit", method = RequestMethod.POST, params = {"articleTitle", "articleContent", "tag"})
-    public @ResponseBody
-    JsonMessage articlePost(@RequestParam(name = "articleTitle") String articleTitle,
-                            @RequestParam(name = "articleContent") String articleContent,
-                            @RequestParam(name = "tag") String tag, Article article) {
+    @RequestMapping(value = "/article/edit", method = RequestMethod.POST, params = {"articleId", "articleTitle", "articleContent", "tag"})
+    public JsonMessage articlePost(String articleId, String articleTitle, String articleContent, String tag, Article article) {
+        if (!StringUtils.isEmpty(articleId)) {
+            article.setArticleId(UUID.fromString(articleId));
+            try {
+                article = articleService.findArticle(article);
+            } catch (ArticleException e) {
+                logger.warn(e.getMessage());
+                return new JsonMessage(JsonMessage.STATUS_ERROR, e.getMessage());
+            }
+        }
         article.setArticleTitle(articleTitle);
         article.setArticleContent(articleContent);
         article.setTagList(tagService.mapToTag(tag));
@@ -59,18 +66,6 @@ public class AdminController {
         article.setUser(user);
         articleService.saveArticle(article);
         return new JsonMessage(JsonMessage.STATUS_OK, article.getArticleId().toString());
-    }
-
-    @RequestMapping(value = "/article/edit", method = RequestMethod.POST, params = {"articleId", "articleTitle", "articleContent", "tag"})
-    public JsonMessage articlePost(String articleId, String articleTitle, String articleContent, String tag, Article article) {
-        article.setArticleId(UUID.fromString(articleId));
-        try {
-            article = articleService.findArticle(article);
-            return articlePost(articleTitle, articleContent, tag, article);
-        } catch (ArticleException e) {
-            logger.warn(e.getMessage());
-            return new JsonMessage(JsonMessage.STATUS_ERROR, e.getMessage());
-        }
     }
 
     @Autowired

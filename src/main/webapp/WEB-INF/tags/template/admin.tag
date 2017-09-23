@@ -37,7 +37,7 @@
                 -webkit-font-smoothing: antialiased;
             }
         </style>
-        <div class="admin-header red lighten-2 valign-wrapper z-depth-2">
+        <div class="admin-header red-cool valign-wrapper z-depth-2">
             <div class="container valign-wrapper">
                 <h4 class="white-text">${title}</h4>
             </div>

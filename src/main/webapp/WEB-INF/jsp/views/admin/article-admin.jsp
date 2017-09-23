@@ -67,8 +67,9 @@
                     $(this).addClass("table-hover");
                 }, function () {
                     $(this).removeClass("table-hover");
-                }).hide().fadeIn(fadeTime, function () {
-                    fadeTime += 1000;
+                }).hide().each(function () {
+                    $(this).fadeIn(fadeTime);
+                    fadeTime+=1000;
                 })
             })
         </script>

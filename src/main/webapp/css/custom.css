@@ -175,3 +175,7 @@ header, main, footer {
 body footer {
     background-color: whitesmoke!important;
 }
+
+.red-cool {
+    background: #E57373 repeating-linear-gradient(30deg, hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1) 15px, transparent 0, transparent 30px);
+}

@@ -1,11 +1,23 @@
 <script>
     $(document).ready(function () {
-        $("a:contains(" + $(document).title + ")").toggleClass("active");
+        var index = $(".side-nav a:contains(" + $(".admin-header div h4").text() + ")").toggleClass("red lighten-2 white-text").parents(".collapsible > li").index();
+        $(".collapsible").collapsible("open", index);
     })
 </script>
+<style>
+    .no-hover {
+        pointer-events: none;
+    }
+
+    .driver-panel {
+        font-size:18px!important;
+        text-align: center;
+        letter-spacing: 2px;
+    }
+</style>
 <ul id="side-out" class="side-nav fixed z-depth-2">
-    <li class="red lighten-2">
-        <a href="javascript:void(0)" class="white-text">仪表盘</a>
+    <li>
+        <a href="javascript:void(0)" class="white-text red-cool z-depth-1 driver-panel no-hover">仪表盘</a>
     </li>
     <li class="no-padding">
         <ul class="collapsible">
