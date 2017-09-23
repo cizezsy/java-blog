@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,10 +61,11 @@ public class AdminController {
         }
     }
 
+    @Transactional
     @RequestMapping(value = "/article/edit",
             method = RequestMethod.POST,
             params = {"articleId", "articleTitle", "articleContent", "tag", "articleRawContent"})
-    public JsonMessage articlePost(@RequestParam(name = "articleId") String articleId,
+    public @ResponseBody JsonMessage articlePost(@RequestParam(name = "articleId") String articleId,
                                    @RequestParam(name = "articleTitle") String articleTitle,
                                    @RequestParam(name = "articleContent") String articleContent,
                                    @RequestParam(name = "tag") String tag,

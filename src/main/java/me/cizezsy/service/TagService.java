@@ -4,6 +4,7 @@ import me.cizezsy.dao.TagDao;
 import me.cizezsy.domain.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +15,7 @@ public class TagService {
 
     private TagDao tagDao;
 
+    @Transactional
     public List<Tag> mapToTag(String tag) {
         List<Tag> tags = Arrays.stream(tag.split(","))
                 .map(s -> {
