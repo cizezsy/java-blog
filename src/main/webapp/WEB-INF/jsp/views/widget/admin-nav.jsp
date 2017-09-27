@@ -10,14 +10,14 @@
     }
 
     .driver-panel {
-        font-size:18px!important;
+        font-size: 18px !important;
         text-align: center;
         letter-spacing: 2px;
     }
 </style>
 <ul id="side-out" class="side-nav fixed z-depth-2">
     <li>
-        <a href="javascript:void(0)" class="white-text red-cool z-depth-1 driver-panel no-hover">仪表盘</a>
+        <a href="javascript:void(0)" class="white-text red lighten-2 stripe-bg z-depth-1 driver-panel no-hover">仪表盘</a>
     </li>
     <li class="no-padding">
         <ul class="collapsible">

@@ -49,7 +49,7 @@
                 <c:forEach var="article" items="${articleList}">
                     <div class="scrollspy section">
                         <h4>
-                            <a href="<c:url value="/article/detail?articleId=${article.articleId}"/>">${article.articleTitle}</a>
+                            <a  class="color-scheme-strongest-text" href="<c:url value="/article/detail?articleId=${article.articleId}"/>">${article.articleTitle}</a>
                         </h4>
                         <p class="article-abstract">${article.articleAbstract}</p>
                         <time class="right article-time">

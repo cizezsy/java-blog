@@ -1,6 +1,7 @@
 <template:admin title="文章编辑"
                 breadcrumpItems="${['仪表盘','文章管理','文章编辑']}"><%--@elvariable id="article" type="me.cizezsy.domain.Article"--%>
     <script src="<c:url value="/js/showdown.min.js"/>"></script>
+    <script src="<c:url value="/js/highlight.pack.js"/>"></script>
     <script async="async">
 
         $(document).ready(function () {
@@ -11,6 +12,12 @@
             var markdownEditorDiv = $("#markdown-editor");
             var editorAreaModal = $('#markdown-editor-textarea-modal');
             var previewModal = $("#markdown-preview-modal");
+
+            converter.setOption("headerLevelStart", 3);
+            converter.setOption("strikethrough", true);
+            converter.setOption("tables", true);
+            converter.setOption("ghCodeBlocks ", true);
+
 
             function heightAdapt() {
                 markdownDiv.height($(window).height() - markdownDiv.offset().top - 10);
@@ -33,25 +40,24 @@
                 }
             });
 
-
             heightAdapt();
 
-
-            $(".markdown-editor-textarea")
-                .val("")
+            editorArea.add(editorAreaModal)
+                .val($("<div/>").html(editorArea.html()).text()).empty()
                 .on('input propertychange', function () {
                     var current = $(this)[0];
                     var value = current.value;
-
                     if ($(this).is(editorArea))
                         editorAreaModal.val(value);
                     else
                         editorArea.val(value);
-
                     var html = converter.makeHtml(value);
                     preview.html(html);
                     previewModal.html(html);
-                });
+                    $('pre code').each(function (i, block) {
+                        hljs.highlightBlock(block);
+                    });
+                }).trigger("input");
 
             $(window).on('resize', function () {
                 heightAdapt();
@@ -64,6 +70,7 @@
                 $(this).width(inputWidth);
             }
 
+
             $.fn.textWidth = function (text, font) {
                 if (!$.fn.textWidth.fakeEl)
                     $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
@@ -71,17 +78,16 @@
                 return $.fn.textWidth.fakeEl.width();
             };
 
+            $(".chip .tag").on('input', resizeInput)
+                .each(resizeInput);
+
             function clipTagClick() {
                 var parent = $(this).parent();
                 $(this).remove();
                 parent.empty();
-                var input = $('<input>')
-                    .attr("type", "text")
-                    .attr("maxLength", 32)
-                    .attr("placeholder", "标签名")
+                var input = $('<input>').attr("type", "text").attr("maxLength", 32).attr("placeholder", "标签名")
                     .addClass("tag")
-                    .on('input', resizeInput)
-                    .each(resizeInput)
+                    .on('input', resizeInput).each(resizeInput)
                     .focusout(function () {
                         var addIcon = $(".chip .icon");
                         if ($(this).val().length === 0) {
@@ -121,23 +127,24 @@
                             'tag': tag.join(','),
                             'articleRawContent': articleRawContent
                         },
-                        success: submitResult
+                        success: submitResult,
+                        error: function () {
+                            Materialize.toast("保存失败", 2000, 'rounded');
+                        }
                     }
                 )
             });
 
             function submitResult(result) {
-                var data = JSON.parse(result);
-                if (data.status === 200) {
-                    $("article-id").val(data.message);
+                if (result.status === 200) {
+                    $("#article-id").val(result.message);
+                    Materialize.toast("保存成功", 2000, 'rounded');
                 } else {
-                    Materialize.toast(data.message, 2000, 'rounded');
+                    Materialize.toast(result.message, 2000, 'rounded');
                 }
             }
         });
     </script>
-    <style>
-    </style>
     <link rel="stylesheet" href="<c:url value="/css/markdown-editor.css"/>">
     <div class="container">
         <div class="input-field col s12">
@@ -145,29 +152,23 @@
             <input id="article-title-input" placeholder="标题" type="text" value="${article.articleTitle}">
         </div>
         <div class="flex-container" style="margin-bottom: 4px">
-            <c:choose>
-                <c:when test="${fn:length(article.tagList) eq 0}">
+            <c:if test="${fn:length(article.tagList) gt 0}">
+                <c:forEach items="${article.tagList}" var="tag">
                     <div class="chip">
-                        添加标签
-                        <i class="icon material-icons">add</i>
+                        <input type="text" maxlength="32" placeholder="标签名" class="tag" value="${tag.tagName}">
                     </div>
-                </c:when>
-                <c:otherwise>
-                    <c:forEach items="${article.tagList}" var="tag">
-                        <div class="chip">
-                            <input type="text" maxlength="32" placeholder="标签名" class="tag" value="${tag.tagName}">
-                        </div>
-                    </c:forEach>
-                </c:otherwise>
-            </c:choose>
+                </c:forEach>
+            </c:if>
+            <div class="chip">
+                添加标签
+                <i class="icon material-icons">add</i>
+            </div>
         </div>
     </div>
     <div id="markdown" class="markdown container row scale-transition">
         <div id="markdown-editor" class="markdown-editor col s6">
             <textarea id="markdown-editor-textarea" class="markdown-editor-textarea" title="markdown-editor-textarea"
-                      placeholder="请输入markdown">
-                    ${article.articleRawContent}
-            </textarea>
+                      placeholder="请输入markdown">${cf:htmlUnescape(article.articleRawContent)}</textarea>
         </div>
         <div id="markdown-preview" class="markdown-preview col m6">${article.articleContent}</div>
     </div>

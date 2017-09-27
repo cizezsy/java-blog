@@ -8,6 +8,7 @@
         <%@include file="widget/front-footer.jsp" %>
     </jsp:attribute>
     <jsp:body>
+        <script src="<c:url value="/js/highlight.pack.js"/>"></script>
         <style>
             .article-header-content {
                 position: relative;
@@ -37,6 +38,22 @@
                 filter: blur(20px);
                 margin: -30px;
             }
+
+            .tag-panel {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 5px !important;
+            }
+
+            .tag-panel .chip {
+                flex: initial;
+                cursor: pointer;
+                -webkit-user-select: none;
+            }
+
+            .tag-panel .chip:hover {
+                cursor: pointer;
+            }
         </style>
         <%--TODO 此处url以后改成动态--%>
         <div class="article-header valign-wrapper">
@@ -52,20 +69,10 @@
         <div class="container clearfix">
             <div class="row">
                 <div class="col s12 m10 article-content">
-                    <div id="introduction" class="section scrollspy">
-                        <p>Content </p>
-                    </div>
-
-                    <div id="structure" class="section scrollspy">
-                        <p>Content </p>
-                    </div>
-
-                    <div id="initialization" class="section scrollspy">
-                        <p>Content </p>
-                    </div>
                     <div>
                             ${article.articleContent}
                     </div>
+                    <hr>
                     <div class="article-info valign-wrapper right">
                         <img class="icon-block" src="<c:url value="/image/ic_time.png"/>">
                         <time>${cf:formatLocalDateTime(article.createTime, "yyyy-MM-dd HH:mm")}</time>
@@ -79,10 +86,16 @@
                 </div>
                 <div class="col hide-on-small-only m2">
                     <div class="pin-top pin-scroll" id="pin-scroll">
+                        <div class="tag-panel">
+                            <%--@elvariable id="tags" type="java.util.List"--%>
+                            <c:forEach items="${article.tagList}" var="tag">
+                                <div class="chip color-scheme-light-text color-scheme-strong rounded hoverable">
+                                    ${tag.tagName}
+                                </div>
+                            </c:forEach>
+                        </div>
                         <ul class="section table-of-contents" id="scroll-spy-ul">
-                            <li><a href="#introduction">Introduction</a></li>
-                            <li><a href="#structure">Structure</a></li>
-                            <li><a href="#initialization">Intialization</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -94,15 +107,24 @@
                 $(document).ready(function () {
                     $('.scrollspy').scrollSpy();
                 });
-
+                var set = false;
+                var width;
                 $(window).scroll(function () {
                     var scrollTop = $(window).scrollTop();
                     var scrollSpyNav = $('#pin-scroll');
-                    if (scrollTop < 442) {
+                    if (scrollTop < 400) {
+                        if(!set) {
+                            width =scrollSpyNav.width();
+                            set = true;
+                        }
                         scrollSpyNav.removeClass("pinned");
                         return;
                     }
                     if (scrollTop + 42 >= scrollSpyNav.offset().top) {
+                        if(set) {
+                            scrollSpyNav.width(width);
+                            set = false;
+                        }
                         scrollSpyNav.addClass('pinned');
                     }
                 });

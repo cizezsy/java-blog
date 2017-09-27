@@ -2,10 +2,12 @@ package me.cizezsy.service;
 
 import me.cizezsy.dao.TagDao;
 import me.cizezsy.domain.Tag;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +19,8 @@ public class TagService {
 
     @Transactional
     public List<Tag> mapToTag(String tag) {
+        if(StringUtils.isEmpty(tag))
+            return new ArrayList<>();
         List<Tag> tags = Arrays.stream(tag.split(","))
                 .map(s -> {
                     Tag t = new Tag();
@@ -25,7 +29,7 @@ public class TagService {
                 })
                 .collect(Collectors.toList());
         tags.forEach(t -> {
-            if (tagDao.findByExample(t).size() == 0)
+            if (tagDao.get(t.getTagName())== null)
                 tagDao.save(t);
         });
         return tags;

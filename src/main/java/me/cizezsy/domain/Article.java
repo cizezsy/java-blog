@@ -1,8 +1,11 @@
 package me.cizezsy.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +23,10 @@ public class Article extends BaseDomain implements Comparable<Article> {
     @Column(name = "article_title")
     private String articleTitle;
     @Column(name = "article_content")
+    @XmlElement
     private String articleContent;
     @Column(name = "article_raw_content")
+    @XmlElement
     private String articleRawContent;
     @Column(name = "article_abstract")
     private String articleAbstract;
@@ -38,11 +43,12 @@ public class Article extends BaseDomain implements Comparable<Article> {
     @Column(name = "view_count")
     private int viewCount;
     @Column(name = "is_top")
-    private boolean isTop;
+    private Boolean isTop;
     @Column(name = "is_publish")
-    private boolean isPublish = true;
+    private Boolean isPublish;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "blog_article_tag",
             joinColumns = {@JoinColumn(name = "article_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_name")})

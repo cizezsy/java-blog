@@ -36,8 +36,8 @@ public class BaseDao<T> {
         return getHibernateTemplate().loadAll(entityClass);
     }
 
-    public void save(T entity) {
-        getHibernateTemplate().save(entity);
+    public Serializable save(T entity) {
+        return getHibernateTemplate().save(entity);
     }
 
     public void remove(T entity) {

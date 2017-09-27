@@ -5,7 +5,7 @@
     }
 
 </style>
-<footer class="page-footer z-depth-3 grey-text text-lighten-2 imageColor">
+<footer class="page-footer z-depth-3 color-scheme-light-text text-lighten-2 color-scheme-strongest">
     <div class="container">
         <div class="row">
             <div class="col s12 center-align">

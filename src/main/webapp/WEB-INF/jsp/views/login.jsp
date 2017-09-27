@@ -33,6 +33,9 @@
                         url: '/login',
                         method: 'post',
                         data: {'userName': userName, 'password': password},
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("X-Ajax-call", true);
+                        },
                         dataType: 'text',
                         success: loginResult
                     }

@@ -13,7 +13,7 @@
 <ul id="side-out" class="side-nav fixed z-depth-2">
     <li>
         <div class="user-view">
-            <div class="background imageColor checkerboard-bg">
+            <div class="background color-scheme-strongest stripe-bg">
                 <%--<c:choose>--%>
                 <%--&lt;%&ndash;@elvariable id="backgroundImg" type="java.lang.String"&ndash;%&gt;--%>
                 <%--<c:when test="${backgroundImg != null}">--%>
@@ -25,7 +25,7 @@
                 <%--</c:choose>--%>
             </div>
             <a href="#"><img src="<c:url value="/image/426H.jpg"/>" class="responsive-img circle center-block"></a>
-            <div class="row center-block center-align"><span class="white-text flow-text">cizezsy</span></div>
+            <div class="row center-block center-align"><span class="color-scheme-light-text flow-text">cizezsy</span></div>
         </div>
     </li>
     <li><a class="subheader">分类</a></li>

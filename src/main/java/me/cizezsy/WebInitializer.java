@@ -1,7 +1,12 @@
-package me.cizezsy.config;
+package me.cizezsy;
 
 
+import me.cizezsy.config.RepositoryConfig;
+import me.cizezsy.config.RootConfig;
+import me.cizezsy.config.SecurityConfig;
+import me.cizezsy.config.WebConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -12,7 +17,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{RootConfig.class, RepositoryConfig.class};
+        return new Class[]{RootConfig.class, RepositoryConfig.class, SecurityConfig.class};
     }
 
     @Override

@@ -13,7 +13,7 @@
     <%@ include file="/WEB-INF/jsp/component/default-css-and-js.jsp" %>
     <title><c:out value="${htmlTitle}"/></title>
 </head>
-<body>
+<body class="color-scheme-lighten">
 <header>
     <jsp:invoke fragment="nav"/>
 </header>

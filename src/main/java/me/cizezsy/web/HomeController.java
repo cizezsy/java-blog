@@ -17,15 +17,8 @@ public class HomeController {
 
     @RequestMapping
     public String home(Model model, Article article) {
+        article.setPublish(true);
         List<Article> articles = articleService.findArticleList(article, WebConstant.DEFAULT_PAGE_START, WebConstant.DEFAULT_PAGE_LIMIT);
-        articles.add(articles.get(0));
-        articles.add(articles.get(0));
-        articles.add(articles.get(0));
-        articles.add(articles.get(0));
-        articles.add(articles.get(0));
-        articles.add(articles.get(0));
-        articles.add(articles.get(0));
-        articles.add(articles.get(0));
         model.addAttribute("articleList", articles);
         return "home";
     }
