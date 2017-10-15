@@ -1,10 +1,3 @@
-<style>
-    c {
-        position: relative;
-        background: hsla(0,0%,100%,.3);
-    }
-
-</style>
 <footer class="page-footer z-depth-3 color-scheme-light-text text-lighten-2 color-scheme-strongest">
     <div class="container">
         <div class="row">
@@ -17,6 +10,6 @@
         </div>
     </div>
     <div class="footer-copyright center-align">
-        <span class="grey-text center-in-container">Made by <a class="grey-text" href="http://materializecss.com">Materialize❤</a></span>
+        <span class="grey-text center-in-container">Theme by <a class="grey-text" href="http://materializecss.com">Materialize❤</a></span>
     </div>
 </footer>

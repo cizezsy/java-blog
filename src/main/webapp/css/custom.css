@@ -99,6 +99,7 @@ header, main, footer {
     font-size: 1rem;
     line-height: 2rem;
     letter-spacing: 0.01rem;
+    width: 100%;
 }
 
 .table-caption {
@@ -135,7 +136,7 @@ header, main, footer {
 }
 
 .table-hover {
-    background-color: #b3e5fc;
+    background-color: #b3e5fc !important;
 }
 
 .flex-container {
@@ -180,6 +181,10 @@ body footer {
     background: repeating-linear-gradient(30deg, hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1) 15px, transparent 0, transparent 30px);
 }
 
+.stripe-bg-reserve {
+    background: repeating-linear-gradient(120deg, hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1) 15px, transparent 0, transparent 30px);
+}
+
 /* fallback */
 @font-face {
     font-family: 'Material Icons';
@@ -204,6 +209,13 @@ body footer {
     -webkit-font-smoothing: antialiased;
 }
 
-.color {
-    color: #efb6c7;
+.checkerboard-bg {
+
+    background-image: linear-gradient(45deg, #eee 25%, transparent 20%),
+    linear-gradient(45deg, transparent 75%, #eee 0),
+    linear-gradient(45deg, #eee 25%, transparent 0),
+    linear-gradient(45deg, transparent 75%, #eee 0);
+
+    background-position: 0 0, 15px 15px, 15px 15px, 30px 30px;
+    background-size: 30px 30px;
 }

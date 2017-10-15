@@ -1,33 +1,28 @@
 package me.cizezsy.web;
 
 import me.cizezsy.domain.Article;
+import me.cizezsy.domain.Category;
 import me.cizezsy.domain.JsonMessage;
 import me.cizezsy.domain.User;
 import me.cizezsy.exception.ArticleException;
 import me.cizezsy.service.ArticleService;
+import me.cizezsy.service.CategoryService;
 import me.cizezsy.service.TagService;
 import me.cizezsy.service.UserService;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.HtmlUtils;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,6 +30,7 @@ public class AdminController {
     private ArticleService articleService;
     private TagService tagService;
     private UserService userService;
+    private CategoryService categoryService;
     private Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @RequestMapping(value = {"/article", "/"}, method = RequestMethod.GET)
@@ -42,13 +38,15 @@ public class AdminController {
         List<Article> articles = articleService
                 .findAllArticle();
         Collections.sort(articles);
+        List<Category> categories = categoryService.findAllCategory();
         model.addAttribute("articles", articles);
+        model.addAttribute("categories", categories);
         return "admin/article-admin";
     }
 
     @RequestMapping(value = "/article", method = RequestMethod.POST, params = {"articleId", "action"})
     public @ResponseBody
-    JsonMessage articleTop(@RequestParam("articleId") String articleId, @RequestParam("action") String action) {
+    JsonMessage articleAction(@RequestParam("articleId") String articleId, @RequestParam("action") String action) {
         Article article = null;
         try {
             article = articleService.findArticle(UUID.fromString(articleId));
@@ -134,5 +132,10 @@ public class AdminController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 }
