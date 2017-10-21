@@ -32,7 +32,6 @@
             </li>
             <li style="font-weight: bold">
                 <a class="waves-effect collapsible-header">用户管理</a>
-                <div class="collapsible-body"></div>
             </li>
             <li style="font-weight: bold">
                 <a class="waves-effect collapsible-header">评论管理</a>

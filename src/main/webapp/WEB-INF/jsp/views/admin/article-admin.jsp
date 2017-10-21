@@ -11,7 +11,7 @@
                 height: 30px;
             }
 
-            .table-cell .input-field , .article-admin-filter .input-field{
+            .table-cell .input-field, .article-admin-filter .input-field {
                 margin-top: 0;
             }
 
@@ -19,9 +19,48 @@
                 margin: 0;
             }
 
-            .container .article-admin-filter > .col{
+            .container .article-admin-filter > .col {
                 margin-left: 0;
             }
+
+            .table-cell-create-category {
+                float: right;
+                display: none;
+                cursor: pointer;
+            }
+
+            .table-cell-category .create-category-div input[type=text] {
+                margin: 0;
+                border: none;
+                height: 30px;
+                background-color: #fff;
+                display: inline-block;
+                border-radius: 4px;
+
+            }
+
+            .table-cell-category {
+                position: relative;
+            }
+
+            .table-cell-category .create-category-div {
+                position: absolute;
+                right: 0;
+                z-index: 1;
+                background-color: transparent;
+                border-radius: 4px;
+            }
+
+            .table-cell-category .create-category-div > span {
+                float: right;
+                margin-right: 0.8rem;
+                width: 0;
+                height: 0;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-bottom: 8px solid #fff;
+            }
+
         </style>
         <script>
             $(document).ready(function () {
@@ -31,6 +70,8 @@
                 $(".add-article").click(function () {
                     location.href = "/admin/article/edit";
                 });
+
+                $('.create-category-div').hide();
 
                 function publishSuccess(ele) {
                     Materialize.toast("设置成功", 2000);
@@ -70,6 +111,33 @@
                         }
                     });
                 });
+
+                $('.table-cell-category').hover(function () {
+                    $('.table-cell-create-category').show();
+                }, function () {
+                    if ($('.create-category-div').is(":hidden"))
+                        $('.table-cell-create-category').hide();
+                });
+
+                $('.table-cell-category').click(function (event) {
+                    event.stopImmediatePropagation()
+                });
+
+                $('.table-cell-create-category').click(function () {
+                    var createCategory = $('.create-category-div');
+                    if (createCategory.is(":hidden")) {
+                        createCategory.show();
+                        $('.table-cell-create-category').text("确定");
+                    } else {
+                        createCategory.hide();
+                        $('.create-category-input').val("")
+                        $('.table-cell-create-category').text("创建");
+                    }
+                });
+
+                $(document).bind("click", function () {
+                    $('.create-category-div').hide();
+                })
 
             });
         </script>
@@ -111,8 +179,15 @@
                     <div class="table-cell">
                         <span>创建时间</span>
                     </div>
-                    <div class="table-cell">
+                    <div class="table-cell table-cell-category">
                         <span>目录</span>
+                        <span class="table-cell-create-category">创建</span>
+                        <div class="z-depth-1 create-category-div">
+                            <span class=""></span>
+                            <div>
+                                <input type="text" class="create-category-input">
+                            </div>
+                        </div>
                     </div>
                     <div class="table-cell">
                         <span>操作</span>
@@ -151,8 +226,6 @@
                                                 </c:forEach>
                                             </c:otherwise>
                                         </c:choose>
-
-                                        <option value="" class="">测试</option>
                                     </select>
                                 </div>
                             </div>
