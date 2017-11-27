@@ -71,9 +71,8 @@ public class AdminController {
 
     @RequestMapping(value = "/article/edit", method = RequestMethod.GET, params = {"articleId"})
     public String articleEdit(@RequestParam("articleId") String articleId, Article article, Model model) {
-        article.setArticleId(UUID.fromString(articleId));
         try {
-            article = articleService.findArticle(article);
+            article = articleService.findArticle(UUID.fromString(articleId));
             model.addAttribute("article", article);
             return "admin/article-admin-edit";
         } catch (ArticleException e) {

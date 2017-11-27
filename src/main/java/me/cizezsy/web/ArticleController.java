@@ -24,15 +24,14 @@ public class ArticleController {
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET, params = {"articleId"})
     public String articleDetail(@RequestParam(name = "articleId") String articleId,
-                                Model model) {
-        Article article;
+                                Article article, Model model) {
         try {
             article = articleService.findArticle(UUID.fromString(articleId));
         } catch (ArticleException e) {
             logger.error(e.getMessage());
             return "error/404";
         }
-        model.addAttribute("article ", article);
+        model.addAttribute("article", article);
         return "article";
     }
 
