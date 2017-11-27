@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = "me.cizezsy.dao")
 @EnableTransactionManagement
 public class RepositoryConfig {
-
     @Bean
     public HibernateTemplate hibernateTemplate(SessionFactory sessionFactory) {
         return new HibernateTemplate(sessionFactory);

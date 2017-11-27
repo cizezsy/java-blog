@@ -9,6 +9,7 @@ import me.cizezsy.service.ArticleService;
 import me.cizezsy.service.CategoryService;
 import me.cizezsy.service.TagService;
 import me.cizezsy.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,13 +92,9 @@ public class AdminController {
                             @RequestParam(name = "tag") String tag,
                             @RequestParam(name = "articleRawContent") String articleRawContent) {
 
+
         Article article = new Article();
-        if (articleId == null) {
-            articleId = articleService.saveArticle(article).toString();
-            article.setTop(false);
-            article.setPublish(true);
-            article.setArticleId(UUID.fromString(articleId));
-        } else {
+        if (!StringUtils.isEmpty(articleId)) {
             try {
                 article = articleService.findArticle(UUID.fromString(articleId));
             } catch (ArticleException e) {
@@ -106,7 +103,6 @@ public class AdminController {
             }
         }
 
-        //调试
         User user = userService.findAllUser().get(0);
         article.setUser(user);
         article.setTagList(tagService.mapToTag(tag));
@@ -114,7 +110,36 @@ public class AdminController {
         article.setArticleContent(articleContent);
         article.setArticleRawContent(articleRawContent);
 
-        articleService.updateArticle(article);
+        if (!StringUtils.isEmpty(articleId)) {
+            articleService.updateArticle(article);
+        } else {
+            article.setTop(false);
+            article.setPublish(true);
+            articleService.saveArticle(article);
+        }
+
+
+//        if (StringUtils.isEmpty(articleId)) {
+//            articleId = articleService.saveArticle(article).toString();
+//            article.setTop(false);
+//            article.setPublish(true);
+//            article.setArticleId(UUID.fromString(articleId));
+//        } else {
+//            try {
+//                article = articleService.findArticle(UUID.fromString(articleId));
+//            } catch (ArticleException e) {
+//                logger.error(e.getMessage());
+//                return new JsonMessage(JsonMessage.STATUS_ERROR, "保存失败");
+//            }
+//        }
+//
+//        article.setUser(user);
+//        article.setTagList(tagService.mapToTag(tag));
+//        article.setArticleTitle(articleTitle);
+//        article.setArticleContent(articleContent);
+//        article.setArticleRawContent(articleRawContent);
+//
+//        articleService.updateArticle(article);
 
         return new JsonMessage(JsonMessage.STATUS_OK, article.getArticleId().toString());
     }
