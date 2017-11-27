@@ -1,6 +1,5 @@
 package me.cizezsy.web;
 
-import me.cizezsy.cons.WebConstant;
 import me.cizezsy.domain.JsonMessage;
 import me.cizezsy.domain.User;
 import me.cizezsy.exception.LoginFailException;

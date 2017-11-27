@@ -1,6 +1,5 @@
 package me.cizezsy.domain;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -10,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "blog_user")
-public class User {
+public class User extends BaseDomain {
 
     @Id
     @GeneratedValue
