@@ -31,14 +31,10 @@
                 </div>
             </li>
             <li style="font-weight: bold">
-                <a class="waves-effect collapsible-header">用户管理</a>
+                <a class="waves-effect collapsible-header">目录管理</a>
             </li>
             <li style="font-weight: bold">
                 <a class="waves-effect collapsible-header">评论管理</a>
-                <div class="collapsible-body"></div>
-            </li>
-            <li style="font-weight: bold">
-                <a class="waves-effect collapsible-header">菜单管理</a>
                 <div class="collapsible-body"></div>
             </li>
         </ul>

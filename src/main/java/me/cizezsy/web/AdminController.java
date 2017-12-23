@@ -5,6 +5,7 @@ import me.cizezsy.domain.Category;
 import me.cizezsy.domain.JsonMessage;
 import me.cizezsy.domain.User;
 import me.cizezsy.exception.ArticleException;
+import me.cizezsy.exception.CategoryNotFoundException;
 import me.cizezsy.service.ArticleService;
 import me.cizezsy.service.CategoryService;
 import me.cizezsy.service.TagService;
@@ -45,10 +46,15 @@ public class AdminController {
         return "admin/article-admin";
     }
 
+    @RequestMapping(value = {"/article"}, method = RequestMethod.POST, params = {"categoryId", "date"})
+    public String article(Model model, Category category, String date) {
+        return "admin/article-admin";
+    }
+
     @RequestMapping(value = "/article", method = RequestMethod.POST, params = {"articleId", "action"})
     public @ResponseBody
     JsonMessage articleAction(@RequestParam("articleId") String articleId, @RequestParam("action") String action) {
-        Article article = null;
+        Article article;
         try {
             article = articleService.findArticle(UUID.fromString(articleId));
         } catch (ArticleException e) {
@@ -59,12 +65,46 @@ public class AdminController {
             article.setTop(!article.isTop());
         } else if ("publish".equals(action)) {
             article.setPublish(!article.isPublish());
+        } else if ("delete".equals(action)) {
+            articleService.deleteArticle(article);
+            return new JsonMessage(JsonMessage.STATUS_OK, "删除成功");
         }
         articleService.updateArticle(article);
         return new JsonMessage(JsonMessage.STATUS_OK, "设置成功");
     }
 
+    @RequestMapping(value = "/article", method = RequestMethod.POST, params = {"articleId", "categoryId"})
+    public @ResponseBody
+    JsonMessage articleCategoryChange(@RequestParam("articleId") String articleId, @RequestParam("categoryId") String categoryId) {
+        Article article;
+        Category category;
+        try {
+            article = articleService.findArticle(UUID.fromString(articleId));
+            category = categoryService.findCategory(UUID.fromString(categoryId));
+        } catch (ArticleException | CategoryNotFoundException e) {
+            logger.error(e.getMessage());
+            return new JsonMessage(JsonMessage.STATUS_ERROR, "目录更改失败");
+        }
+        article.setCategory(category);
+        articleService.saveArticle(article);
+        return new JsonMessage(JsonMessage.STATUS_OK, "目录更改成功");
+    }
+
+    @RequestMapping(value = "/article", method = RequestMethod.POST, params = {"categoryName"})
+    public @ResponseBody
+    JsonMessage articleCategoryCreate(@RequestParam("categoryName") String categoryName) {
+        Category category = new Category();
+        category.setCategoryTitle(categoryName);
+        if (categoryService.isExist(category)) {
+            return new JsonMessage(JsonMessage.STATUS_ERROR, "目录已经存在");
+        } else {
+            categoryService.saveCategory(category);
+            return new JsonMessage(JsonMessage.STATUS_OK, category.getCategoryId().toString());
+        }
+    }
+
     @RequestMapping(value = "/article/edit", method = RequestMethod.GET)
+
     public String articleEdit() {
         return "admin/article-admin-edit";
     }

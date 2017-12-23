@@ -12,8 +12,22 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-
+        
+        <script>
+            $(document).ready(function () {
+                $(".admin-header-home-btn").hover(function () {
+                    $(this).text("H")
+                }, function () {
+                    $(this).text("")
+                }).click(function () {
+                    window.location.href = "<c:url value="/home"/>"
+                })
+            })
+        </script>
         <div class="admin-header red lighten-2 stripe-bg valign-wrapper z-depth-2">
+            <div style="" class="hoverable admin-header-home-btn">
+
+            </div>
             <div class="container valign-wrapper">
                 <h4 class="white-text">${title}</h4>
             </div>

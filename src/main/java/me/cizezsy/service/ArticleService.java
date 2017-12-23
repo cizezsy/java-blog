@@ -62,6 +62,10 @@ public class ArticleService {
         return articleDao.save(article);
     }
 
+    @Transactional
+    public void deleteArticle(Article article) {
+        articleDao.remove(article);
+    }
 
     @Autowired
     public void setArticleDao(ArticleDao articleDao) {

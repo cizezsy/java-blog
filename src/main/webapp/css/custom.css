@@ -219,3 +219,17 @@ body footer {
     background-position: 0 0, 15px 15px, 15px 15px, 30px 30px;
     background-size: 30px 30px;
 }
+
+.admin-header-home-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    user-select: none;
+    font-style: italic;
+}

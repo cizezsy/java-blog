@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>me.cizezsy.web.HomeController</OriginalElement>
+  <nodes>
+    <node x="1621.739583333333" y="690.0">me.cizezsy.web.ArticleController</node>
+    <node x="936.1703851118771" y="400.0">me.cizezsy.exception.LoginFailException</node>
+    <node x="1390.0037184452103" y="270.0">me.cizezsy.domain.Article</node>
+    <node x="1380.713962994837" y="400.0">me.cizezsy.cons.WebConstant</node>
+    <node x="1254.5495517785437" y="270.0">me.cizezsy.dao.TagDao</node>
+    <node x="414.42039945496344" y="530.0">me.cizezsy.config.RepositoryConfig</node>
+    <node x="1323.3937499999997" y="690.0">me.cizezsy.web.AdminController</node>
+    <node x="1711.435266064258" y="80.0">me.cizezsy.dao.BaseDao</node>
+    <node x="1067.482885111877" y="530.0">me.cizezsy.service.UserService</node>
+    <node x="228.0" y="765.0">me.cizezsy.function.FormatLocalDateTime</node>
+    <node x="1383.5037184452103" y="0.0">me.cizezsy.domain.BaseDomain</node>
+    <node x="1919.685266064258" y="80.0">me.cizezsy.domain.Category</node>
+    <node x="1235.2162184452104" y="80.0">me.cizezsy.domain.Tag</node>
+    <node x="1553.6306296615037" y="400.0">me.cizezsy.exception.ArticleException</node>
+    <node x="1808.7812499999998" y="690.0">me.cizezsy.web.HomeController</node>
+    <node x="263.42039945496344" y="530.0">me.cizezsy.config.SecurityConfig</node>
+    <node x="1223.5495517785437" y="400.0">me.cizezsy.service.TagService</node>
+    <node x="2117.068129661504" y="80.0">me.cizezsy.domain.Menu</node>
+    <node x="717.4203994549634" y="530.0">me.cizezsy.config.WebConfig</node>
+    <node x="1714.6306296615037" y="400.0">me.cizezsy.dao.ArticleDao</node>
+    <node x="264.9999999999998" y="400.0">me.cizezsy.security.AjaxAuthenticationFailureHandler</node>
+    <node x="1874.435266064258" y="270.0">me.cizezsy.dao.CategoryDao</node>
+    <node x="0.0" y="400.0">me.cizezsy.security.AjaxAuthenticationSuccessHandler</node>
+    <node x="2030.310266064258" y="400.0">me.cizezsy.service.MenuService</node>
+    <node x="893.2187499999998" y="690.0">me.cizezsy.web.LoginController</node>
+    <node x="1039.795385111877" y="270.0">me.cizezsy.dao.UserDao</node>
+    <node x="1621.935266064258" y="530.0">me.cizezsy.service.ArticleService</node>
+    <node x="1075.607885111877" y="80.0">me.cizezsy.domain.User</node>
+    <node x="556.25" y="690.0">me.cizezsy.WebInitializer</node>
+    <node x="0.0" y="765.0">me.cizezsy.security.SpringSecurityInitializer</node>
+    <node x="447.0" y="765.0">me.cizezsy.web.MenuController</node>
+    <node x="1767.935266064258" y="530.0">me.cizezsy.service.CategoryService</node>
+    <node x="767.0453994549634" y="270.0">me.cizezsy.domain.JsonMessage</node>
+    <node x="808.0" y="765.0">me.cizezsy.web.TestController</node>
+    <node x="2020.435266064258" y="270.0">me.cizezsy.dao.MenuDao</node>
+    <node x="583.4203994549634" y="530.0">me.cizezsy.config.RootConfig</node>
+    <node x="631.0" y="765.0">me.cizezsy.function.HtmlUnescape</node>
+    <node x="637.5416666666665" y="400.0">me.cizezsy.security.BlogUserDetailsService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="me.cizezsy.web.LoginController" target="me.cizezsy.service.UserService">
+      <point x="34.5" y="-15.0" />
+      <point x="996.7187499999998" y="660.0" />
+      <point x="1081.982885111877" y="660.0" />
+      <point x="-43.5" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.security.AjaxAuthenticationFailureHandler" target="me.cizezsy.domain.JsonMessage">
+      <point x="-59.5" y="-15.0" />
+      <point x="324.4999999999998" y="350.0" />
+      <point x="806.7328994549634" y="350.0" />
+      <point x="-23.8125" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.config.SecurityConfig" target="me.cizezsy.security.BlogUserDetailsService">
+      <point x="32.75" y="-15.0" />
+      <point x="361.67039945496344" y="500.0" />
+      <point x="683.0416666666665" y="500.0" />
+      <point x="-45.5" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.WebInitializer" target="me.cizezsy.config.RepositoryConfig">
+      <point x="-15.875000000000227" y="-15.0" />
+      <point x="603.8749999999998" y="660.0" />
+      <point x="488.92039945496344" y="660.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.MenuDao" target="me.cizezsy.domain.Menu">
+      <point x="35.0" y="-15.0" />
+      <point x="2107.935266064258" y="240.0" />
+      <point x="2137.318129661504" y="240.0" />
+      <point x="-20.25" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.domain.Article" target="me.cizezsy.domain.Tag">
+      <point x="-12.0" y="-15.0" />
+      <point x="1420.0037184452103" y="140.0" />
+      <point x="1284.2162184452104" y="140.0" />
+      <point x="13.999999999999886" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.HomeController" target="me.cizezsy.cons.WebConstant">
+      <point x="-60.428571428571445" y="-15.0" />
+      <point x="1818.8526785714284" y="610.0" />
+      <point x="1475.213962994837" y="610.0" />
+      <point x="31.5" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.LoginController" target="me.cizezsy.domain.User">
+      <point x="-11.5" y="-15.0" />
+      <point x="950.7187499999998" y="650.0" />
+      <point x="925.6703851118771" y="650.0" />
+      <point x="925.6703851118771" y="160.0" />
+      <point x="1089.670385111877" y="160.0" />
+      <point x="-23.4375" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.WebInitializer" target="me.cizezsy.config.SecurityConfig">
+      <point x="-47.62500000000023" y="-15.0" />
+      <point x="572.1249999999998" y="670.0" />
+      <point x="328.92039945496344" y="670.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.UserService" target="me.cizezsy.domain.User">
+      <point x="23.200000000000045" y="-15.0" />
+      <point x="1148.682885111877" y="510.0" />
+      <point x="1151.8032487091227" y="510.0" />
+      <point x="1151.8032487091227" y="180.0" />
+      <point x="1117.795385111877" y="180.0" />
+      <point x="4.6875" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.HomeController" target="me.cizezsy.domain.Category">
+      <point x="60.428571428571445" y="-15.0" />
+      <point x="1939.709821428571" y="670.0" />
+      <point x="2162.810266064258" y="670.0" />
+      <point x="2162.810266064258" y="160.0" />
+      <point x="2012.2685993975915" y="160.0" />
+      <point x="42.08333333333337" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.WebInitializer" target="me.cizezsy.config.RootConfig">
+      <point x="15.874999999999773" y="-15.0" />
+      <point x="635.6249999999998" y="670.0" />
+      <point x="640.4203994549634" y="670.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.CategoryService" target="me.cizezsy.dao.CategoryDao">
+      <point x="-47.333333333333314" y="-15.0" />
+      <point x="1791.6019327309245" y="490.0" />
+      <point x="1931.435266064258" y="490.0" />
+      <point x="1931.435266064258" y="340.0" />
+      <point x="1905.685266064258" y="340.0" />
+      <point x="-31.25" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.security.BlogUserDetailsService" target="me.cizezsy.dao.UserDao">
+      <point x="0.0" y="-15.0" />
+      <point x="728.5416666666665" y="370.0" />
+      <point x="1052.170385111877" y="370.0" />
+      <point x="-37.125" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.exception.ArticleException">
+      <point x="28.600000000000023" y="-15.0" />
+      <point x="1423.4937499999999" y="630.0" />
+      <point x="1589.747766064258" y="630.0" />
+      <point x="1589.747766064258" y="510.0" />
+      <point x="1576.963962994837" y="510.0" />
+      <point x="-46.666666666666686" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.ArticleService" target="me.cizezsy.domain.Article">
+      <point x="-15.625" y="-15.0" />
+      <point x="1668.810266064258" y="460.0" />
+      <point x="1704.1306296615037" y="460.0" />
+      <point x="1704.1306296615037" y="370.0" />
+      <point x="1439.0037184452103" y="370.0" />
+      <point x="7.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.domain.Menu" target="me.cizezsy.domain.BaseDomain">
+      <point x="0.0" y="-15.0" />
+      <point x="2157.568129661504" y="50.0" />
+      <point x="1492.4037184452104" y="50.0" />
+      <point x="48.39999999999998" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.ArticleController" target="me.cizezsy.service.ArticleService">
+      <point x="17.75" y="-15.0" />
+      <point x="1710.489583333333" y="650.0" />
+      <point x="1694.8519327309245" y="650.0" />
+      <point x="10.416666666666686" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.MenuDao" target="me.cizezsy.dao.BaseDao">
+      <point x="-35.0" y="-15.0" />
+      <point x="2037.935266064258" y="180.0" />
+      <point x="1796.435266064258" y="180.0" />
+      <point x="35.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.UserService" target="me.cizezsy.exception.LoginFailException">
+      <point x="-46.40000000000009" y="-15.0" />
+      <point x="1079.082885111877" y="510.0" />
+      <point x="1052.420385111877" y="510.0" />
+      <point x="38.75" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.config.SecurityConfig" target="me.cizezsy.security.AjaxAuthenticationSuccessHandler">
+      <point x="-54.58333333333326" y="-15.0" />
+      <point x="274.3370661216302" y="510.0" />
+      <point x="61.25" y="510.0" />
+      <point x="-61.25" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.service.UserService">
+      <point x="-57.200000000000045" y="-15.0" />
+      <point x="1337.69375" y="660.0" />
+      <point x="1168.982885111877" y="660.0" />
+      <point x="43.5" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.domain.User" target="me.cizezsy.domain.BaseDomain">
+      <point x="0.0" y="-15.0" />
+      <point x="1113.107885111877" y="50.0" />
+      <point x="1395.6037184452105" y="50.0" />
+      <point x="-48.39999999999998" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.TagDao" target="me.cizezsy.domain.Tag">
+      <point x="-31.333333333333258" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.domain.User">
+      <point x="-28.600000000000023" y="-15.0" />
+      <point x="1366.2937499999998" y="630.0" />
+      <point x="1213.0495517785437" y="630.0" />
+      <point x="1213.0495517785437" y="170.0" />
+      <point x="1127.170385111877" y="170.0" />
+      <point x="14.0625" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.ArticleService" target="me.cizezsy.dao.ArticleDao">
+      <point x="46.875" y="-15.0" />
+      <point x="1731.310266064258" y="480.0" />
+      <point x="1795.6306296615037" y="480.0" />
+      <point x="27.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.UserService" target="me.cizezsy.dao.UserDao">
+      <point x="-23.200000000000045" y="-15.0" />
+      <point x="12.375" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.UserDao" target="me.cizezsy.dao.BaseDao">
+      <point x="12.375" y="-15.0" />
+      <point x="1101.670385111877" y="190.0" />
+      <point x="1716.435266064258" y="190.0" />
+      <point x="-45.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.service.ArticleService">
+      <point x="47.66666666666663" y="-15.0" />
+      <point x="1442.5604166666665" y="650.0" />
+      <point x="1653.185266064258" y="650.0" />
+      <point x="-31.25" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.service.CategoryService">
+      <point x="66.73333333333335" y="-15.0" />
+      <point x="1461.6270833333333" y="670.0" />
+      <point x="1821.185266064258" y="670.0" />
+      <point x="-17.75" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.domain.JsonMessage">
+      <point x="-38.133333333333326" y="-15.0" />
+      <point x="1356.7604166666665" y="640.0" />
+      <point x="1203.5162184452104" y="640.0" />
+      <point x="1203.5162184452104" y="330.0" />
+      <point x="886.1078994549634" y="330.0" />
+      <point x="55.5625" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.HomeController" target="me.cizezsy.domain.Article">
+      <point x="40.28571428571422" y="-15.0" />
+      <point x="1920.435266064258" y="350.0" />
+      <point x="1467.0037184452103" y="350.0" />
+      <point x="35.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.CategoryDao" target="me.cizezsy.dao.BaseDao">
+      <point x="-41.66666666666663" y="-15.0" />
+      <point x="1895.2685993975915" y="200.0" />
+      <point x="1776.435266064258" y="200.0" />
+      <point x="15.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.ArticleController" target="me.cizezsy.domain.Article">
+      <point x="-53.25" y="-15.0" />
+      <point x="1639.489583333333" y="620.0" />
+      <point x="1528.213962994837" y="620.0" />
+      <point x="1528.213962994837" y="380.0" />
+      <point x="1425.0037184452103" y="380.0" />
+      <point x="-7.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.UserDao" target="me.cizezsy.domain.User">
+      <point x="-12.375" y="-15.0" />
+      <point x="1076.920385111877" y="180.0" />
+      <point x="1108.420385111877" y="180.0" />
+      <point x="-4.6875" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.CategoryDao" target="me.cizezsy.domain.Category">
+      <point x="41.66666666666663" y="-15.0" />
+      <point x="8.416666666666629" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.domain.Article" target="me.cizezsy.domain.User">
+      <point x="-24.0" y="-15.0" />
+      <point x="1408.0037184452103" y="150.0" />
+      <point x="1145.920385111877" y="150.0" />
+      <point x="32.8125" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.domain.Article" target="me.cizezsy.domain.Category">
+      <point x="24.0" y="-15.0" />
+      <point x="1456.0037184452103" y="230.0" />
+      <point x="1928.1019327309245" y="230.0" />
+      <point x="-42.08333333333337" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.domain.Article" target="me.cizezsy.domain.BaseDomain">
+      <point x="12.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.config.SecurityConfig" target="me.cizezsy.security.AjaxAuthenticationFailureHandler">
+      <point x="-10.916666666666742" y="-15.0" />
+      <point x="318.0037327882967" y="510.0" />
+      <point x="324.4999999999998" y="510.0" />
+      <point x="-59.5" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.service.TagService">
+      <point x="-9.533333333333303" y="-15.0" />
+      <point x="1385.3604166666664" y="610.0" />
+      <point x="1283.8162184452103" y="610.0" />
+      <point x="1283.8162184452103" y="500.0" />
+      <point x="1306.7995517785437" y="500.0" />
+      <point x="27.750000000000114" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.HomeController" target="me.cizezsy.service.CategoryService">
+      <point x="0.0" y="-15.0" />
+      <point x="1879.2812499999998" y="580.0" />
+      <point x="1856.685266064258" y="580.0" />
+      <point x="17.75" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.domain.Article">
+      <point x="9.533333333333303" y="-15.0" />
+      <point x="1404.427083333333" y="590.0" />
+      <point x="1364.8615820424561" y="590.0" />
+      <point x="1364.8615820424561" y="380.0" />
+      <point x="1411.0037184452103" y="380.0" />
+      <point x="-21.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.domain.Tag" target="me.cizezsy.domain.BaseDomain">
+      <point x="-1.1368683772161603E-13" y="-15.0" />
+      <point x="1270.2162184452104" y="60.0" />
+      <point x="1419.8037184452103" y="60.0" />
+      <point x="-24.200000000000045" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.WebInitializer" target="me.cizezsy.config.WebConfig">
+      <point x="47.62499999999977" y="-15.0" />
+      <point x="667.3749999999998" y="670.0" />
+      <point x="773.9203994549634" y="670.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.LoginController" target="me.cizezsy.domain.JsonMessage">
+      <point x="-34.5" y="-15.0" />
+      <point x="927.7187499999998" y="660.0" />
+      <point x="892.6391351118771" y="660.0" />
+      <point x="892.6391351118771" y="350.0" />
+      <point x="854.3578994549634" y="350.0" />
+      <point x="23.8125" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.AdminController" target="me.cizezsy.domain.Category">
+      <point x="19.066666666666606" y="-15.0" />
+      <point x="1413.9604166666663" y="620.0" />
+      <point x="1517.213962994837" y="620.0" />
+      <point x="1517.213962994837" y="250.0" />
+      <point x="1961.7685993975915" y="250.0" />
+      <point x="-8.416666666666629" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.ArticleService" target="me.cizezsy.exception.ArticleException">
+      <point x="-46.875" y="-15.0" />
+      <point x="1637.560266064258" y="510.0" />
+      <point x="1623.6306296615037" y="510.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.LoginController" target="me.cizezsy.exception.LoginFailException">
+      <point x="11.5" y="-15.0" />
+      <point x="973.7187499999998" y="670.0" />
+      <point x="974.9203851118771" y="670.0" />
+      <point x="-38.75" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.HomeController" target="me.cizezsy.service.ArticleService">
+      <point x="-20.14285714285714" y="-15.0" />
+      <point x="1859.1383928571427" y="590.0" />
+      <point x="1736.5185993975913" y="590.0" />
+      <point x="52.083333333333314" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.TagDao" target="me.cizezsy.dao.BaseDao">
+      <point x="1.1368683772161603E-13" y="-15.0" />
+      <point x="1301.549551778544" y="210.0" />
+      <point x="1736.435266064258" y="210.0" />
+      <point x="-25.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.security.BlogUserDetailsService" target="me.cizezsy.domain.User">
+      <point x="-60.66666666666674" y="-15.0" />
+      <point x="667.8749999999998" y="320.0" />
+      <point x="496.73288511187684" y="320.0" />
+      <point x="496.73288511187684" y="150.0" />
+      <point x="1080.295385111877" y="150.0" />
+      <point x="-32.8125" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.security.AjaxAuthenticationSuccessHandler" target="me.cizezsy.domain.JsonMessage">
+      <point x="-61.25" y="-15.0" />
+      <point x="61.25" y="330.0" />
+      <point x="774.9828994549634" y="330.0" />
+      <point x="-55.5625" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.CategoryService" target="me.cizezsy.domain.Category">
+      <point x="47.333333333333314" y="-15.0" />
+      <point x="1886.2685993975913" y="510.0" />
+      <point x="2009.935266064258" y="510.0" />
+      <point x="2009.935266064258" y="250.0" />
+      <point x="1995.435266064258" y="250.0" />
+      <point x="25.25" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.ArticleDao" target="me.cizezsy.domain.Article">
+      <point x="-36.0" y="-15.0" />
+      <point x="1732.6306296615037" y="360.0" />
+      <point x="1453.0037184452103" y="360.0" />
+      <point x="21.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.MenuService" target="me.cizezsy.dao.MenuDao">
+      <point x="-40.66666666666666" y="-15.0" />
+      <point x="2050.6435993975915" y="380.0" />
+      <point x="2046.685266064258" y="380.0" />
+      <point x="-26.25" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.TagService" target="me.cizezsy.domain.Tag">
+      <point x="-41.624999999999886" y="-15.0" />
+      <point x="1237.4245517785437" y="380.0" />
+      <point x="1233.0495517785437" y="380.0" />
+      <point x="1233.0495517785437" y="170.0" />
+      <point x="1242.2162184452104" y="170.0" />
+      <point x="-28.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.dao.ArticleDao" target="me.cizezsy.dao.BaseDao">
+      <point x="36.0" y="-15.0" />
+      <point x="1804.6306296615037" y="380.0" />
+      <point x="1779.6306296615037" y="380.0" />
+      <point x="1779.6306296615037" y="210.0" />
+      <point x="1766.435266064258" y="210.0" />
+      <point x="5.0" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.web.ArticleController" target="me.cizezsy.exception.ArticleException">
+      <point x="53.25" y="-15.0" />
+      <point x="1745.989583333333" y="650.0" />
+      <point x="1757.435266064258" y="650.0" />
+      <point x="1757.435266064258" y="450.0" />
+      <point x="1670.2972963281704" y="450.0" />
+      <point x="46.66666666666663" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.TagService" target="me.cizezsy.dao.TagDao">
+      <point x="13.875000000000114" y="-15.0" />
+      <point x="1292.9245517785437" y="380.0" />
+      <point x="1278.0495517785437" y="380.0" />
+      <point x="-23.5" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.UserService" target="me.cizezsy.cons.WebConstant">
+      <point x="46.40000000000009" y="-15.0" />
+      <point x="1171.8828851118772" y="510.0" />
+      <point x="1412.213962994837" y="510.0" />
+      <point x="-31.5" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.domain.Category" target="me.cizezsy.domain.BaseDomain">
+      <point x="0.0" y="-15.0" />
+      <point x="1970.185266064258" y="60.0" />
+      <point x="1468.2037184452104" y="60.0" />
+      <point x="24.200000000000045" y="15.0" />
+    </edge>
+    <edge source="me.cizezsy.service.MenuService" target="me.cizezsy.domain.Menu">
+      <point x="40.66666666666663" y="-15.0" />
+      <point x="2131.9769327309245" y="380.0" />
+      <point x="2135.935266064258" y="380.0" />
+      <point x="2135.935266064258" y="250.0" />
+      <point x="2177.818129661504" y="250.0" />
+      <point x="20.25" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.426554267650158" x="1142.0780632411067" y="504.0447273638255" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
