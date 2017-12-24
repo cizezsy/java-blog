@@ -45,7 +45,7 @@ CREATE TABLE `blog_article` (
 
 LOCK TABLES `blog_article` WRITE;
 /*!40000 ALTER TABLE `blog_article` DISABLE KEYS */;
-INSERT INTO `blog_article` VALUES ('72b0a132-47aa-4e2f-86af-d780ca8d2d6d','从零开始搭建博客——Spring Security 403错误','<h5 id=\"springsecurity403\">Spring Security 403</h5>\n<hr>\n<p>上午给博客加上了Spring Security用以权限控制，但是不知道为什么一直403错误。</p>\n<p>一开始，报错提示：</p>\n<blockquote>\n  <p>Forbidden (403) CSRF verification failed. Request aborted. Even using the {% csrf_token %}</p>\n</blockquote>\n<p>之后在配置中将其disable了</p>\n<pre><code class=\"hljs java\"><span class=\"hljs-function\"><span class=\"hljs-keyword\">protected</span> <span class=\"hljs-keyword\">void</span> <span class=\"hljs-title\">configure</span><span class=\"hljs-params\">(HttpSecurity http)</span> <span class=\"hljs-keyword\">throws</span> Exception </span>{\n    http.csrf().disable()\n}\n</code></pre>\n<p>但依然还是提示403 Forbidden，验证失败。最后debug了很久，终于发现原因。</p>\n<p>在SpringSecurity配置访问所需角色时，我设置的是 <code>USER</code></p>\n<pre><code class=\"java language-java hljs\">http.authorizeRequests.antMatchers(<span class=\"hljs-string\">\"/admin/**\"</span>).hasRole(<span class=\"hljs-string\">\"USER\"</span>)\n</code></pre>\n<p>然而给用户设置角色时，不能设置为<code>USER</code>。必须在前面加上<code>ROLE_</code>。</p>\n<pre><code class=\"java language-java hljs\">authorities.add(<span class=\"hljs-keyword\">new</span> SimpleGrantedAuthority(<span class=\"hljs-string\">\"ROLE_USER\"</span>));\n</code></pre>\n<p>这样才能匹配上Spring Security设置的USER角色</p>\n<hr>\n<blockquote>\n  <p>博客持续施工中.......</p>\n</blockquote>',NULL,'2017-09-27 06:38:25','2017-09-27 06:38:25','123e4567-e89b-12d3-a456-426655440000',0,1,1,NULL,'###Spring Security 403\n\n-------\n上午给博客加上了Spring Security用以权限控制，但是不知道为什么一直403错误。\n\n一开始，报错提示：\n\n> Forbidden (403) CSRF verification failed. Request aborted. Even using the {% csrf_token %}\n\n之后在配置中将其disable了\n```\nprotected void configure(HttpSecurity http) throws Exception {\n    http.csrf().disable()\n}\n\n```\n\n但依然还是提示403 Forbidden，验证失败。最后debug了很久，终于发现原因。\n\n在SpringSecurity配置访问所需角色时，我设置的是 `USER`\n```java\nhttp.authorizeRequests.antMatchers(\"/admin/**\").hasRole(\"USER\")\n```\n然而给用户设置角色时，不能设置为`USER`。必须在前面加上`ROLE_`。\n```java\nauthorities.add(new SimpleGrantedAuthority(\"ROLE_USER\"));\n```\n\n这样才能匹配上Spring Security设置的USER角色\n\n-------\n\n> 博客持续施工中.......\n\n\n');
+INSERT INTO `blog_article` VALUES ('881b3495-0935-4026-9634-9a0a927274cb','添加了快速目录创建功能与检索功能','<h5 id=\"\">说明</h5>\n<ol>\n<li><p>增加了快速目录创建功能，只要把鼠标文章列表目录table header处，就能看到功能按钮。</p></li>\n<li><p>添加了检索功能，能通过时间范围及目录检索文章。</p></li>\n</ol>\n<blockquote>\n  <p>逐渐完善中</p>\n</blockquote>',NULL,'2017-12-24 02:53:39','2017-12-24 02:53:39','123e4567-e89b-12d3-a456-426655440000',0,1,1,'0a46c981-9af6-4af0-a574-dada394bf489','###说明\n1. 增加了快速目录创建功能，只要把鼠标文章列表目录table header处，就能看到功能按钮。\n\n2. 添加了检索功能，能通过时间范围及目录检索文章。\n\n> 逐渐完善中');
 /*!40000 ALTER TABLE `blog_article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,6 @@ CREATE TABLE `blog_article_tag` (
 
 LOCK TABLES `blog_article_tag` WRITE;
 /*!40000 ALTER TABLE `blog_article_tag` DISABLE KEYS */;
-INSERT INTO `blog_article_tag` VALUES (94,'72b0a132-47aa-4e2f-86af-d780ca8d2d6d','spring'),(95,'72b0a132-47aa-4e2f-86af-d780ca8d2d6d','java'),(96,'72b0a132-47aa-4e2f-86af-d780ca8d2d6d','spring-security'),(97,'72b0a132-47aa-4e2f-86af-d780ca8d2d6d','java web');
 /*!40000 ALTER TABLE `blog_article_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,6 +95,7 @@ CREATE TABLE `blog_category` (
 
 LOCK TABLES `blog_category` WRITE;
 /*!40000 ALTER TABLE `blog_category` DISABLE KEYS */;
+INSERT INTO `blog_category` VALUES ('0a46c981-9af6-4af0-a574-dada394bf489','java','java编程相关',0),('38a0803e-a241-4c42-9e0f-919f79ee9f58','日常','日常生活记录',2);
 /*!40000 ALTER TABLE `blog_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,6 +123,33 @@ CREATE TABLE `blog_menu` (
 LOCK TABLES `blog_menu` WRITE;
 /*!40000 ALTER TABLE `blog_menu` DISABLE KEYS */;
 /*!40000 ALTER TABLE `blog_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blog_site`
+--
+
+DROP TABLE IF EXISTS `blog_site`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_site` (
+  `site_id` int(11) NOT NULL,
+  `site_name` varchar(64) NOT NULL,
+  `site_motto` varchar(32) NOT NULL,
+  `site_long_motto` text,
+  `site_bg` varchar(1024) NOT NULL,
+  PRIMARY KEY (`site_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_site`
+--
+
+LOCK TABLES `blog_site` WRITE;
+/*!40000 ALTER TABLE `blog_site` DISABLE KEYS */;
+INSERT INTO `blog_site` VALUES (1,'彩笺','未有知而不行者，知而不行，只是未知','When I was a child I ate a lot of food.\nMost of it is long gone and forgotten,\nbut certainly some of it became my very bones and flesh.\nThink of reading as the same thing for the mind.','/image/11.png');
+/*!40000 ALTER TABLE `blog_site` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -185,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-27  8:37:21
+-- Dump completed on 2017-12-24 22:00:20
