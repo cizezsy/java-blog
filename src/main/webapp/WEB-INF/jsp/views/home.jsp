@@ -1,6 +1,8 @@
-<template:main htmlTitle="主页">
+<%--@elvariable id="articleList" type="java.util.List<Article>"--%>
+<%--@elvariable id="site" type="me.cizezsy.domain.Site"--%>
+<template:main htmlTitle="${site.siteName}">
     <jsp:attribute name="nav">
-         <c:set var="backgroundImg" value="/image/pexels-photo-424154.jpeg" scope="request"/>
+         <c:set var="backgroundImg" value="${site.siteBg}" scope="request"/>
         <%@include file="widget/front-nav.jsp" %>
     </jsp:attribute>
     <jsp:attribute name="footer">
@@ -8,50 +10,40 @@
     </jsp:attribute>
     <jsp:body>
         <style>
-            .article-header-content {
-                position: relative;
-            }
-
-
             .article-header, .article-header-content ::before {
-                background: url("/image/pexels-photo-424154.jpeg") 0 / cover fixed;
-            }
-
-            .article-header-content {
-                width: 80%;
-                margin: 0 auto;
-                position: relative;
-                background: hsla(0,0%,100%,.3);
-                overflow: hidden;
-                z-index: 1;
-            }
-
-            .article-header-content ::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                z-index: -1;
-                filter: blur(20px);
-                margin: -30px;
+                background: url("${backgroundImg}") 0 / cover fixed;
             }
         </style>
+        <link href="<c:url value="/css/custom/home.css"/>" type="text/css" rel="stylesheet"/>
+        <script src="<c:url value="/js/custom/home.js"/>"></script>
         <div class="article-header valign-wrapper center-align">
             <div class="article-header-content">
-                <h4 class="white-text">未有知而不行者，知而不行，只是未知</h4>
+                <h4 class="white-text">${site.siteMotto}</h4>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                    <%--@elvariable id="articleList" type="java.util.List<Article>"--%>
                 <c:forEach var="article" items="${articleList}">
-                    <div class="scrollspy section">
+                    <div class="scrollspy section article-item-section">
                         <h4>
-                            <a  class="color-scheme-strongest-text" href="<c:url value="/article/detail?articleId=${article.articleId}"/>">${article.articleTitle}</a>
+                            <a class="color-scheme-strongest-text"
+                               href="<c:url value="/article/detail?articleId=${article.articleId}"/>">${article.articleTitle}</a>
                         </h4>
-                        <p class="article-abstract">${article.articleAbstract}</p>
+                        <c:choose>
+                            <c:when test="${article.articleAbstract eq null or article.articleAbstract eq ''}">
+                                <div class="article-abstract">
+                                        ${article.articleContent}
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="article-abstract">
+                                        ${article.articleAbstract}
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                        <div class="left article-more valign-wrapper">
+                            <span>查看更多</span><i class="material-icons">arrow_drop_down</i>
+                        </div>
                         <time class="right article-time">
                                 ${cf:formatLocalDateTime(article.createTime, 'yyyy-MM-dd')}
                         </time>

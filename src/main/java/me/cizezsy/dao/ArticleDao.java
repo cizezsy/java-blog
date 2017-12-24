@@ -18,7 +18,10 @@ public class ArticleDao extends BaseDao<Article> {
         super(Article.class);
     }
 
-//    public List<Article> findByDateRestrict(LocalDateTime start, LocalDateTime end) {
-//        DetachedCriteria criteria = new DetachedCriteria()
-//    }
+    public List<Article> findByDateRestrict(LocalDateTime start, LocalDateTime end) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
+        criteria.add(Restrictions.ge("createTime", start));
+        criteria.add(Restrictions.le("createTime", end));
+        return findByCriteria(criteria);
+    }
 }

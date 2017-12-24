@@ -19,18 +19,20 @@ $(document).ready(function () {
     $('.create-category-div').hide();
 
 
-    $(".admin-article-action-publish").click(function () {
+    $(".admin-article-action-is-publish-box").change(function () {
         var ele = $(this);
-        var articleId = ele.parent().children(".admin-article-id").val();
-        $.ajax({
+        var articleId = ele.parents(".table-row").find(".admin-article-id").val();
+        $.post({
             method: 'post',
             url: '/admin/article',
             data: {'articleId': articleId, 'action': 'publish'},
+            dataType: 'text',
             success: function (data) {
                 data = JSON.parse(data);
                 if (data.status === 200) {
                     Materialize.toast(data.message, 2000);
-                    ele.text(ele.text().trim() === "公布" ? "隐藏" : "公布")
+                    var b = ele.find(".admin-article-action-is-top-box");
+                    b.checked = !b.checked;
                 } else {
                     Materialize.toast(data.message, 2000);
                 }
@@ -41,9 +43,9 @@ $(document).ready(function () {
         });
     });
 
-    $('.admin-article-action-top').click(function () {
+    $('.admin-article-action-is-top-box').change(function () {
         var ele = $(this);
-        var articleId = ele.parent().children(".admin-article-id").val();
+        var articleId = ele.parents(".table-row").find(".admin-article-id").val();
         $.post({
             method: 'post',
             url: '/admin/article',
@@ -53,7 +55,8 @@ $(document).ready(function () {
                 data = JSON.parse(data);
                 if (data.status === 200) {
                     Materialize.toast(data.message, 2000);
-                    ele.text(ele.text().trim() === "置顶" ? "取消置顶" : "置顶")
+                    var b = ele.find(".admin-article-action-is-top-box");
+                    b.checked = !b.checked;
                 } else {
                     Materialize.toast(data.message, 2000);
                 }
@@ -66,7 +69,7 @@ $(document).ready(function () {
 
     $(".admin-article-action-delete").click(function () {
         var ele = $(this);
-        var articleId = ele.parent().children(".admin-article-id").val();
+        var articleId = ele.parents(".table-row").find(".admin-article-id").val();
         $.post({
             method: 'post',
             url: '/admin/article',
@@ -105,27 +108,43 @@ $(document).ready(function () {
             $('.table-cell-create-category').text("确定");
         } else {
             var categoryName = $('.create-category-input').val();
-            $.post({
-                method: 'post',
-                url: '/admin/article',
-                data: {'categoryName': categoryName},
-                dataType: 'text',
-                success: function (data) {
-                    data = JSON.parse(data);
-                    if (data.status === 200) {
-                        //TODO add new category to category List
-                        Materialize.toast("创建成功", 2000);
-                    } else {
-                        Materialize.toast(data.message, 2000);
+            if (categoryName.length > 32) {
+                Materialize.toast("目录名应小于32个字符", 2000);
+            } else if (categoryName.length === 0) {
+                Materialize.toast("目录名不可为空", 2000);
+            } else {
+                $.post({
+                    method: 'post',
+                    url: '/admin/article',
+                    data: {'categoryName': categoryName},
+                    dataType: 'text',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if (data.status === 200) {
+                            //TODO add new category to category List
+                            var option = $("<option/>", {
+                                value: data.message,
+                                class: "red-text lighten-text-2",
+                                text: categoryName
+                            });
+
+                            $(".article-category-select").material_select("destroy");
+                            $(".article-category-select").append(option).material_select();
+                            $(".category-filter-select").material_select("destroy");
+                            $(".category-filter-select").append(option).material_select();
+                            Materialize.toast("创建成功", 2000);
+                        } else {
+                            Materialize.toast(data.message, 2000);
+                        }
+                    },
+                    error: function () {
+                        Materialize.toast("删除失败", 2000)
                     }
-                },
-                error: function () {
-                    Materialize.toast("删除失败", 2000)
-                }
-            });
-            createCategory.hide();
-            $('.create-category-input').val("");
-            $('.table-cell-create-category').text("创建");
+                });
+                createCategory.hide();
+                $('.create-category-input').val("");
+                $('.table-cell-create-category').text("创建");
+            }
         }
     });
 
@@ -169,6 +188,52 @@ $(document).ready(function () {
     });
 
     $(".article-filter-btn").click(function () {
+        var start = $("#startDatePicker").val();
+        var end = $("#endDatePicker").val();
+        if (start === '') {
+            start = Date.parse("1970-01-01");
+        } else {
+            start = Date.parse(start)
+        }
+        if (end === '') {
+            end = Date.now();
+        } else {
+            end = Date.parse(end);
+        }
+        var categoryIds = $("#category-filter-select").val();
 
+        var form;
+        form = $('<form />', {
+            action: "/admin/article",
+            method: "get",
+            style: 'display: none;'
+        });
+        $('<input />', {
+            type: 'hidden',
+            name: "categoryIds",
+            value: categoryIds
+        }).appendTo(form);
+        $('<input />', {
+            type: 'hidden',
+            name: "start",
+            value: start
+        }).appendTo(form);
+        $('<input />', {
+            type: 'hidden',
+            name: "end",
+            value: end
+        }).appendTo(form);
+
+        form.appendTo('body').submit();
+    });
+
+    var fadeTime = 1000;
+    $(".table-row").hover(function () {
+        $(this).addClass("table-hover");
+    }, function () {
+        $(this).removeClass("table-hover");
+    }).hide().each(function () {
+        $(this).fadeIn(fadeTime);
+        fadeTime += 1000;
     })
 });

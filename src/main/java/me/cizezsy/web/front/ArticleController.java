@@ -1,4 +1,4 @@
-package me.cizezsy.web;
+package me.cizezsy.web.front;
 
 import me.cizezsy.domain.Article;
 import me.cizezsy.exception.ArticleException;

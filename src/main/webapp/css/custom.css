@@ -157,17 +157,6 @@ header, main, footer {
     margin-top: 5px;
 }
 
-.admin-article-row {
-
-}
-
-.admin-article-cell {
-
-}
-
-.admin-article-action {
-    margin-right: 0.5em;
-}
 
 .breadcrumb:before {
     color: #EF5350;
@@ -232,4 +221,8 @@ body footer {
     color: white;
     user-select: none;
     font-style: italic;
+}
+
+.table-row-group .table-cell {
+    border: solid #e8dedef2 1px;
 }

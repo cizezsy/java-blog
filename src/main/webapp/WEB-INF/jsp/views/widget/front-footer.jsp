@@ -2,10 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col s12 center-align">
-                <span>When I was a child I ate a lot of food.</span><br>
-                <span> Most of it is long gone and forgotten,</span><br>
-                <span>but certainly some of it became my very bones and flesh.</span><br>
-                <span>Think of reading as the same thing for the mind.<br></span>
+                <c:forEach items="${mottoLines}" var="m">
+                    <span>${m}</span><br>
+                </c:forEach>
+                <%--<span>When I was a child I ate a lot of food.</span><br>--%>
+                <%--<span> Most of it is long gone and forgotten,</span><br>--%>
+                <%--<span>but certainly some of it became my very bones and flesh.</span><br>--%>
+                <%--<span>Think of reading as the same thing for the mind.<br></span>--%>
             </div>
         </div>
     </div>

@@ -2,12 +2,16 @@ package me.cizezsy.service;
 
 import me.cizezsy.dao.ArticleDao;
 import me.cizezsy.domain.Article;
+import me.cizezsy.domain.Category;
 import me.cizezsy.exception.ArticleException;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +19,6 @@ import java.util.stream.Collectors;
 public class ArticleService {
 
     private ArticleDao articleDao;
-
 
     public List<Article> findArticleList(Article example, int start, int limits) {
         List<Article> articles = findArticleList(example);
@@ -44,6 +47,18 @@ public class ArticleService {
             return articles.get(0);
     }
 
+    public List<Article> findArticleByCategory(Category category) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
+        criteria.add(Restrictions.eq("category", category));
+        return articleDao.findByCriteria(criteria);
+    }
+
+    public List<Article> findArticleByCategory(Category category, int start, int limits) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Article.class);
+        criteria.add(Restrictions.eq("category", category));
+        return articleDao.findByCriteria(criteria).stream().sorted().skip(start).limit(limits).collect(Collectors.toList());
+    }
+
     public Article findArticle(Serializable id) throws ArticleException {
         Article article = articleDao.get(id);
         if (article == null)
@@ -51,6 +66,16 @@ public class ArticleService {
         return article;
     }
 
+    public List<Article> queryByDateAndCategories(List<Category> categories, LocalDateTime start, LocalDateTime end) {
+        List<Article> articles = queryByDate(start, end);
+        return articles.stream()
+                .filter(a -> categories.contains(a.getCategory()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Article> queryByDate(LocalDateTime start, LocalDateTime end) {
+        return articleDao.findByDateRestrict(start, end);
+    }
 
     @Transactional
     public void updateArticle(Article article) {

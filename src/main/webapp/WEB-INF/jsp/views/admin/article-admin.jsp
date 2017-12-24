@@ -1,68 +1,6 @@
 <%--@elvariable id="categories" type="java.util.List<me.cizezsy.domain.Category>"--%>
 <template:admin title="文章列表" breadcrumpItems="${['仪表盘', '文章管理', '文章列表']}">
     <jsp:attribute name="breadcrumpEnd">
-        <style>
-            .dropdown-content li > a, .dropdown-content li > span {
-                color: #EF5350;
-            }
-
-            .table-cell .select-wrapper input.select-dropdown {
-                margin: 0;
-                border: none;
-                height: 30px;
-            }
-
-            .table-cell .input-field, .article-admin-filter .input-field {
-                margin-top: 0;
-            }
-
-            .container .article-admin-filter {
-                margin: 0;
-            }
-
-            .container .article-admin-filter > .col {
-                margin-left: 0;
-            }
-
-            .table-cell-create-category {
-                float: right;
-                display: none;
-                cursor: pointer;
-            }
-
-            .table-cell-category .create-category-div input[type=text] {
-                margin: 0;
-                border: none;
-                height: 30px;
-                background-color: #fff;
-                display: inline-block;
-                border-radius: 4px;
-
-            }
-
-            .table-cell-category {
-                position: relative;
-            }
-
-            .table-cell-category .create-category-div {
-                position: absolute;
-                right: 0;
-                z-index: 1;
-                background-color: transparent;
-                border-radius: 4px;
-            }
-
-            .table-cell-category .create-category-div > span {
-                float: right;
-                margin-right: 0.8rem;
-                width: 0;
-                height: 0;
-                border-left: 8px solid transparent;
-                border-right: 8px solid transparent;
-                border-bottom: 8px solid #fff;
-            }
-
-        </style>
         <div class="right">
             <button class="btn add-article">
                 添加文章
@@ -70,15 +8,19 @@
         </div>
     </jsp:attribute>
     <jsp:body>
+        <link href="<c:url value="/css/custom/article-admin.css"/>" type="text/css" rel="stylesheet"/>
         <script src="<c:url value="/js/custom/article-admin.js"/>"></script>
         <div class="container">
             <div class="row article-admin-filter valign-wrapper">
                 <div class="col m3">
-                    <input type="text" class="datepicker" placeholder="日期">
+                    <input type="text" class="datepicker" placeholder="起始日期（默认无）" id="startDatePicker">
+                </div>
+                <div class="col m3">
+                    <input type="text" class="datepicker" placeholder="截至日期（默认今日）" id="endDatePicker">
                 </div>
                 <div class="input-field col m3">
-                    <select multiple class="category-filter-select">
-                        <option value="" selected>所有目录</option>
+                    <select multiple class="category-filter-select" id="category-filter-select">
+                        <option value="all" selected>所有目录</option>
                         <c:forEach items="${categories}" var="category">
                             <option value="${category.categoryId}"
                                     class="red-text lighten-text-2">${category.categoryTitle}</option>
@@ -114,6 +56,12 @@
                         </div>
                     </div>
                     <div class="table-cell">
+                        <span>置顶</span>
+                    </div>
+                    <div class="table-cell">
+                        <span>公布</span>
+                    </div>
+                    <div class="table-cell">
                         <span>操作</span>
                     </div>
                 </div>
@@ -122,13 +70,20 @@
                     <c:forEach items="${articles}" var="article">
                         <div class="table-row">
                             <div class="table-cell">
-                                <span>${article.articleTitle}</span>
+                                <c:choose>
+                                    <c:when test="${article.articleTitle.length() > 12}">
+                                        <span>${article.articleTitle.substring(0, 11)}...</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span>${article.articleTitle}</span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="table-cell">
                                 <span>${article.user.userName}</span>
                             </div>
                             <div class="table-cell">
-                                <span>${cf:formatLocalDateTime(article.createTime, "yyyy-mm-dd HH:mm:ss")}</span>
+                                <span>${cf:formatLocalDateTime(article.createTime, "yyyy-MM-dd HH:mm")}</span>
                             </div>
                             <div class="table-cell">
                                 <div class="input-field">
@@ -153,26 +108,39 @@
                                 </div>
                             </div>
                             <div class="table-cell">
-                                <a href="#" class="admin-article-action admin-article-action-top">
-                                    <c:choose>
-                                        <c:when test="${article.top}">
-                                            取消置顶
-                                        </c:when>
-                                        <c:otherwise>
-                                            置顶
-                                        </c:otherwise>
-                                    </c:choose>
-                                </a>
-                                <a href="#" class="admin-article-action admin-article-action-publish">
-                                    <c:choose>
-                                        <c:when test="${article.publish}">
-                                            隐藏
-                                        </c:when>
-                                        <c:otherwise>
-                                            公布
-                                        </c:otherwise>
-                                    </c:choose>
-                                </a>
+                                <div class="switch admin-article-action admin-article-action-top"
+                                     style="display: inline-block">
+                                    <label>
+                                        <c:choose>
+                                            <c:when test="${article.top}">
+                                                <input type="checkbox" checked class="admin-article-action-is-top-box">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="checkbox" class="admin-article-action-is-top-box">
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <span class="lever"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="table-cell">
+                                <div class="switch admin-article-action admin-article-action-publish"
+                                     style="display: inline-block">
+                                    <label>
+                                        <c:choose>
+                                            <c:when test="${article.publish}">
+                                                <input type="checkbox" checked
+                                                       class="admin-article-action-is-publish-box">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="checkbox" class="admin-article-action-is-publish-box">
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <span class="lever"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="table-cell">
                                 <input type="hidden" value="${article.articleId}" class="admin-article-id">
                                 <a href="<c:url value="/admin/article/edit?articleId=${article.articleId}"/>"
                                    class="admin-article-action">编辑</a>
@@ -184,17 +152,6 @@
             </div>
         </div>
         <script>
-            $(document).ready(function () {
-                var fadeTime = 1000;
-                $(".table-row").hover(function () {
-                    $(this).addClass("table-hover");
-                }, function () {
-                    $(this).removeClass("table-hover");
-                }).hide().each(function () {
-                    $(this).fadeIn(fadeTime);
-                    fadeTime += 1000;
-                })
-            })
         </script>
     </jsp:body>
 </template:admin>

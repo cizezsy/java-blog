@@ -22,6 +22,9 @@
     <li class="no-padding">
         <ul class="collapsible">
             <li style="font-weight: bold">
+                <a class="waves-effect collapsible-header" href="#">站点信息</a>
+            </li>
+            <li style="font-weight: bold">
                 <a class="waves-effect collapsible-header">文章管理</a>
                 <div class="collapsible-body">
                     <ul>
@@ -31,11 +34,14 @@
                 </div>
             </li>
             <li style="font-weight: bold">
-                <a class="waves-effect collapsible-header">目录管理</a>
+                <a class="waves-effect collapsible-header" href="<c:url value="/admin/category"/>">目录管理</a>
             </li>
             <li style="font-weight: bold">
                 <a class="waves-effect collapsible-header">评论管理</a>
                 <div class="collapsible-body"></div>
+            </li>
+            <li style="font-weight: bold">
+                <a class="waves-effect collapsible-header" href="<c:url value="/admin/site"/>">站点管理</a>
             </li>
         </ul>
     </li>

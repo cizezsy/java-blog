@@ -1,0 +1,44 @@
+.article-header-content {
+    position: relative;
+}
+
+
+.article-header-content {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    background: hsla(0, 0%, 100%, .3);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.article-header-content ::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(20px);
+    margin: -30px;
+}
+
+.article-header-content h4 {
+    user-select: none;
+}
+
+.article-abstract {
+    margin-left: 20px;
+    font-size: smaller;
+    max-height: 200px;
+}
+
+.color-scheme-strongest-text {
+    font-size: 30px;
+}
+
+.article-more {
+    font-size: 14px;
+    cursor: pointer;
+}

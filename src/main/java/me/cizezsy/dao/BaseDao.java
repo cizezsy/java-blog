@@ -1,6 +1,7 @@
 package me.cizezsy.dao;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
@@ -50,6 +51,10 @@ public class BaseDao<T> {
 
     public void update(T entity) {
         getHibernateTemplate().update(entity);
+    }
+
+    public List<T> findByCriteria(DetachedCriteria criteria) {
+        return (List<T>) getHibernateTemplate().findByCriteria(criteria);
     }
 
     @Autowired

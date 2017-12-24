@@ -1,4 +1,4 @@
-package me.cizezsy.web;
+package me.cizezsy.web.admin;
 
 import me.cizezsy.domain.Article;
 import me.cizezsy.domain.Category;
@@ -22,18 +22,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class ArticleAdminController {
     private ArticleService articleService;
     private TagService tagService;
     private UserService userService;
     private CategoryService categoryService;
-    private Logger logger = LoggerFactory.getLogger(AdminController.class);
+    private Logger logger = LoggerFactory.getLogger(ArticleAdminController.class);
 
     @RequestMapping(value = {"/article", "/"}, method = RequestMethod.GET)
     public String article(Model model) {
@@ -46,8 +49,23 @@ public class AdminController {
         return "admin/article-admin";
     }
 
-    @RequestMapping(value = {"/article"}, method = RequestMethod.POST, params = {"categoryId", "date"})
-    public String article(Model model, Category category, String date) {
+    @RequestMapping(value = {"/article"}, method = RequestMethod.GET, params = {"categoryIds", "start", "end"})
+    public String article(Model model, @RequestParam("categoryIds") String categoryIds,
+                          @RequestParam("start") long start,
+                          @RequestParam("end") long end) {
+        LocalDateTime startDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(start), ZoneId.systemDefault());
+        LocalDateTime endDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(end), ZoneId.systemDefault());
+        List<Article> articles;
+        if (categoryIds.contains("all")) {
+            articles = articleService.queryByDate(startDate, endDate);
+        } else {
+            List<Category> categories = categoryService.mapToCategory(categoryIds);
+            articles = articleService.queryByDateAndCategories(categories, startDate, endDate);
+        }
+        Collections.sort(articles);
+        List<Category> categories = categoryService.findAllCategory();
+        model.addAttribute("articles", articles);
+        model.addAttribute("categories", categories);
         return "admin/article-admin";
     }
 
@@ -80,13 +98,13 @@ public class AdminController {
         Category category;
         try {
             article = articleService.findArticle(UUID.fromString(articleId));
-            category = categoryService.findCategory(UUID.fromString(categoryId));
+            category = categoryService.findCategory(categoryId);
         } catch (ArticleException | CategoryNotFoundException e) {
             logger.error(e.getMessage());
             return new JsonMessage(JsonMessage.STATUS_ERROR, "目录更改失败");
         }
         article.setCategory(category);
-        articleService.saveArticle(article);
+        articleService.updateArticle(article);
         return new JsonMessage(JsonMessage.STATUS_OK, "目录更改成功");
     }
 

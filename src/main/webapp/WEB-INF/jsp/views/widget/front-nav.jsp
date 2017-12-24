@@ -13,14 +13,14 @@
                 <%--</c:choose>--%>
             </div>
             <a href="#"><img src="<c:url value="/image/426H.jpg"/>" class="responsive-img circle center-block"></a>
-            <div class="row center-block center-align"><span class="color-scheme-light-text flow-text">cizezsy</span></div>
+            <div class="row center-block center-align"><span class="color-scheme-light-text flow-text">cizezsy</span>
+            </div>
         </div>
     </li>
-    <li><a class="subheader">分类</a></li>
-    <li><a class="waves-effect">默认</a></li>
+    <li><a class="subheader">Category</a></li>
+    <%--@elvariable id="categoryList" type="java.util.List<me.cizezsy.domain.Category>"--%>
+    <c:forEach items="${categoryList}" var="category" end="6">
+        <li><a class="waves-effect" href="<c:url value="/home?categoryId=${category.categoryId}"/>">${category.categoryTitle}</a></li>
+    </c:forEach>
     <li><a class="subheader">近期发布</a></li>
-    <li><a class="waves-effect">测试</a></li>
-    <li><a class="waves-effect">测试</a></li>
-    <li><a class="waves-effect">测试</a></li>
-    <li><a class="waves-effect">测试</a></li>
 </ul>

@@ -1,0 +1,72 @@
+.admin-article-row {
+
+}
+
+.admin-article-cell {
+
+}
+
+.admin-article-action {
+    margin-right: 0.5em;
+}
+
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: #EF5350;
+}
+
+.table-cell .select-wrapper input.select-dropdown {
+    margin: 0;
+    border: none;
+    height: 30px;
+}
+
+.table-cell .input-field, .article-admin-filter .input-field {
+    margin-top: 0;
+}
+
+.container .article-admin-filter {
+    margin: 0;
+}
+
+.container .article-admin-filter > .col {
+    margin-left: 0;
+}
+
+.table-cell-create-category {
+    float: right;
+    display: none;
+    cursor: pointer;
+}
+
+.table-cell-category .create-category-div input[type=text] {
+    margin: 0;
+    border: none;
+    height: 30px;
+    background-color: #fff;
+    display: inline-block;
+    border-radius: 4px;
+
+}
+
+.table-cell-category {
+    position: relative;
+}
+
+.table-cell-category .create-category-div {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+.table-cell-category .create-category-div > span {
+    float: right;
+    margin-right: 0.8rem;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+}
