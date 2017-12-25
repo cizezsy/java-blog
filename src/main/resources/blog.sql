@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `blog_article`;
 CREATE TABLE `blog_article` (
   `article_id` varchar(64) NOT NULL,
   `article_title` varchar(64) NOT NULL,
-  `article_content` text,
+  `article_content` longtext,
   `article_abstract` varchar(128) DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -45,7 +45,7 @@ CREATE TABLE `blog_article` (
 
 LOCK TABLES `blog_article` WRITE;
 /*!40000 ALTER TABLE `blog_article` DISABLE KEYS */;
-INSERT INTO `blog_article` VALUES ('881b3495-0935-4026-9634-9a0a927274cb','添加了快速目录创建功能与检索功能','<h5 id=\"\">说明</h5>\n<ol>\n<li><p>增加了快速目录创建功能，只要把鼠标文章列表目录table header处，就能看到功能按钮。</p></li>\n<li><p>添加了检索功能，能通过时间范围及目录检索文章。</p></li>\n</ol>\n<blockquote>\n  <p>逐渐完善中</p>\n</blockquote>',NULL,'2017-12-24 02:53:39','2017-12-24 02:53:39','123e4567-e89b-12d3-a456-426655440000',0,1,1,'0a46c981-9af6-4af0-a574-dada394bf489','###说明\n1. 增加了快速目录创建功能，只要把鼠标文章列表目录table header处，就能看到功能按钮。\n\n2. 添加了检索功能，能通过时间范围及目录检索文章。\n\n> 逐渐完善中');
+INSERT INTO `blog_article` VALUES ('0a97f4f1-3cb2-48a0-bfb4-a3f7160cffc4','blog编写目前进展','<blockquote>\n  <p>目前，blog的主要模块都基本完成了</p>\n</blockquote>\n<hr>\n<h5 id=\"articlemodular\">文章模块</h5>\n<p>文章的基本操作</p>\n<ol>\n<li>文章的markdown富文本编辑</li>\n<li>文章的标签、目录管理</li>\n<li>文章的发布置顶操作</li>\n</ol>\n<p>快捷功能<br>\n快速目录创建</p>\n<p>需要补充的部分</p>\n<ul>\n<li>文章背景图片自定义编辑</li>\n<li>文章的首页概述改善</li>\n</ul>\n<pre><code class=\"hljs\">等等等等凑字数等等等等凑字数等等等等凑字数等等等等凑字数等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数等等等等凑字数\n等等等等凑字数\n</code></pre>\n<h5 id=\"categprymag\">目录管理</h5>\n<p>目录快捷编辑<br>\n目录的修改</p>',NULL,'2017-12-25 01:03:20','2017-12-25 01:03:20','123e4567-e89b-12d3-a456-426655440000',0,0,1,'0a46c981-9af6-4af0-a574-dada394bf489','> 目前，blog的主要模块都基本完成了\n\n-----\n\n###文章模块 {article-modular}\n\n文章的基本操作\n1. 文章的markdown富文本编辑\n2. 文章的标签、目录管理\n3. 文章的发布置顶操作\n\n快捷功能\n快速目录创建\n\n需要补充的部分\n\n- 文章背景图片自定义编辑\n- 文章的首页概述改善\n\n```\n等等等等凑字数等等等等凑字数等等等等凑字数等等等等凑字数等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数\n等等等等凑字数等等等等凑字数\n等等等等凑字数\n```\n\n###目录管理 {categpry-mag}\n\n目录快捷编辑\n目录的修改\n\n\n'),('881b3495-0935-4026-9634-9a0a927274cb','添加了快速目录创建功能与检索功能','<h5 id=\"\">说明</h5>\n<ol>\n<li><p>增加了快速目录创建功能，只要把鼠标文章列表目录table header处，就能看到功能按钮。</p></li>\n<li><p>添加了检索功能，能通过时间范围及目录检索文章。</p></li>\n</ol>\n<blockquote>\n  <p>逐渐完善中</p>\n</blockquote>',NULL,'2017-12-24 02:53:39','2017-12-24 02:53:39','123e4567-e89b-12d3-a456-426655440000',0,1,1,'0a46c981-9af6-4af0-a574-dada394bf489','###说明\n1. 增加了快速目录创建功能，只要把鼠标文章列表目录table header处，就能看到功能按钮。\n\n2. 添加了检索功能，能通过时间范围及目录检索文章。\n\n> 逐渐完善中');
 /*!40000 ALTER TABLE `blog_article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `blog_article_tag` (
   `article_id` varchar(64) DEFAULT NULL,
   `tag_name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`article_tag_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +70,7 @@ CREATE TABLE `blog_article_tag` (
 
 LOCK TABLES `blog_article_tag` WRITE;
 /*!40000 ALTER TABLE `blog_article_tag` DISABLE KEYS */;
+INSERT INTO `blog_article_tag` VALUES (142,'0a97f4f1-3cb2-48a0-bfb4-a3f7160cffc4','java'),(143,'0a97f4f1-3cb2-48a0-bfb4-a3f7160cffc4','spring'),(144,'0a97f4f1-3cb2-48a0-bfb4-a3f7160cffc4','blog'),(145,'0a97f4f1-3cb2-48a0-bfb4-a3f7160cffc4','program');
 /*!40000 ALTER TABLE `blog_article_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +149,7 @@ CREATE TABLE `blog_site` (
 
 LOCK TABLES `blog_site` WRITE;
 /*!40000 ALTER TABLE `blog_site` DISABLE KEYS */;
-INSERT INTO `blog_site` VALUES (1,'彩笺','未有知而不行者，知而不行，只是未知','When I was a child I ate a lot of food.\nMost of it is long gone and forgotten,\nbut certainly some of it became my very bones and flesh.\nThink of reading as the same thing for the mind.','/image/11.png');
+INSERT INTO `blog_site` VALUES (1,'深蓝','谁这时孤独，就永远孤独','When I was a child I ate a lot of food.\nMost of it is long gone and forgotten,\nbut certainly some of it became my very bones and flesh.\nThink of reading as the same thing for the mind.','/image/11.jpg');
 /*!40000 ALTER TABLE `blog_site` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +172,7 @@ CREATE TABLE `blog_tag` (
 
 LOCK TABLES `blog_tag` WRITE;
 /*!40000 ALTER TABLE `blog_tag` DISABLE KEYS */;
-INSERT INTO `blog_tag` VALUES ('java'),('java web'),('spring'),('spring-security');
+INSERT INTO `blog_tag` VALUES ('blog'),('java'),('java web'),('program'),('spring'),('spring-security');
 /*!40000 ALTER TABLE `blog_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,4 +213,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-24 22:00:20
+-- Dump completed on 2017-12-25 10:07:58
