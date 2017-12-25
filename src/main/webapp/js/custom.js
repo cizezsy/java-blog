@@ -15,7 +15,7 @@ $(document).ready(function () {
     btnCps.show();
 
     function componentToHex(c) {
-        var hex = c.toString(16);
+        var hex = Number(c).toString(16);
         return hex.length === 1 ? "0" + hex : hex;
     }
     function rgbToHex(r, g, b) {
@@ -27,11 +27,12 @@ $(document).ready(function () {
         var image = $(".color-thief-target")[0];
         var colorThief = new ColorThief();
         if (image) {
-            var rgb = colorThief.getColor(image, 5);
+            var rgb = colorThief.getColor(image, 10);
             var scheme = new ColorScheme;
             var colors = scheme.from_hex(rgbToHex(rgb[0],rgb[1],rgb[2]))
                 .scheme("mono")
-                .variation("pastel").colors();
+                .variation("soft")
+                .colors();
 
             addGlobalCss(".color-scheme-strongest",
                 "{background-color:#"+colors[1]+"!important;}");

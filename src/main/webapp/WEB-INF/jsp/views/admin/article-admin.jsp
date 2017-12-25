@@ -69,15 +69,8 @@
                         <%--@elvariable id="articles" type="java.util.List<me.cizezsy.domain.Article>"--%>
                     <c:forEach items="${articles}" var="article">
                         <div class="table-row">
-                            <div class="table-cell">
-                                <c:choose>
-                                    <c:when test="${article.articleTitle.length() > 12}">
-                                        <span>${article.articleTitle.substring(0, 11)}...</span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span>${article.articleTitle}</span>
-                                    </c:otherwise>
-                                </c:choose>
+                            <div class="table-cell article-admin-title">
+                                ${article.articleTitle}
                             </div>
                             <div class="table-cell">
                                 <span>${article.user.userName}</span>

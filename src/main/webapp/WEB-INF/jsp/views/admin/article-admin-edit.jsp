@@ -17,6 +17,10 @@
             converter.setOption("strikethrough", true);
             converter.setOption("tables", true);
             converter.setOption("ghCodeBlocks ", true);
+            //converter.setOption('emoji', true);
+            //converter.setOption("ghCompatibleHeaderId", true);
+            converter.setOption("customizedHeaderId", true);
+            converter.setOption("simpleLineBreaks", true);
 
 
             function heightAdapt() {
@@ -178,7 +182,10 @@
             <i class="material-icons">menu</i>
         </a>
         <ul>
-
+            <li>
+                <a class="btn-floating green tooltipped" data-position="left"
+                   data-delay="50" data-tooltip="背景图片url"><i class="material-icons" id="bg-img">image</i></a>
+            </li>
             <li>
                 <a class="btn-floating blue modal-trigger tooltipped" href="#modal1" data-position="left"
                    data-delay="50" data-tooltip="全屏编辑">

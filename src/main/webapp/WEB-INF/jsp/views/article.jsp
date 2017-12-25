@@ -128,6 +128,16 @@
                         scrollSpyNav.addClass('pinned');
                     }
                 });
+
+                $(".article-content h5").each(function () {
+                    var ele = $(this);
+                    var idValue = ele.attr("id");
+                    $("<li/>").append($("<a>", {
+                        href:"#"+idValue,
+                        text: ele.text()
+                    })).appendTo("#scroll-spy-ul")
+                });
+                $(".article-content h5").scrollSpy();
             })
         </script>
         <img src="<c:url value="${backgroundImg}"/>" class="color-thief-target" style="display: none">
