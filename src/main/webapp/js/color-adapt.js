@@ -11,7 +11,7 @@ function addGlobalCss(selector, rule) {
 $(document).ready(function () {
 
     var btnCps = $('.button-collapse');
-    btnCps.sideNav();
+    btnCps.sidenav();
     btnCps.show();
 
     function componentToHex(c) {
