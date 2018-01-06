@@ -59,6 +59,5 @@
             </div>
         </div>
         <script src="<c:url value="/js/custom/article.js"/>"></script>
-        <img src="<c:url value="${backgroundImg}"/>" class="color-thief-target" style="display: none">
     </jsp:body>
 </template:main>

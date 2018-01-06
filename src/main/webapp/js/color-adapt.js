@@ -23,8 +23,18 @@ $(document).ready(function () {
     }
 
 
-    function colorInit() {
-        var image = $(".color-thief-target")[0];
+    var src = $("main").css("background-image");
+    var url = src.match(/\((.*?)\)/)[1].replace(/('|")/g,'');
+    var img = new Image();
+    img.onload = function (ev) {
+        colorInit(img);
+    };
+    img.src = url;
+    if(img.complete) img.onload();
+
+    function colorInit(image) {
+
+        //var image = $(".color-thief-target")[0];
         var colorThief = new ColorThief();
         if (image) {
             var rgb = colorThief.getColor(image, 10);
@@ -176,11 +186,11 @@ $(document).ready(function () {
         }
     }
 
-    $(".color-thief-target").one("load", function () {
-        colorInit();
-    }).each(function () {
-        this.complete && $(this).trigger('load');
-    });
+    // $(".color-thief-target").one("load", function () {
+    //     colorInit();
+    // }).each(function () {
+    //     this.complete && $(this).trigger('load');
+    // });
 
     if (/Edge\/\d./i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent)){
         $('body').on("mousewheel", function () {

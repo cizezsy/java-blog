@@ -59,6 +59,5 @@
                 </div>
             </c:forEach>
         </div>
-        <img src="<c:url value="${backgroundImg}"/>" class="color-thief-target" style="display: none">
     </jsp:body>
 </template:main>
