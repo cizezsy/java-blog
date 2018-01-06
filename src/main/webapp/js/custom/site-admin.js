@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#site-long-motto").trigger("autoresize");
-    Materialize.updateTextFields();
+    M.updateTextFields();
 
     $(".admin-site-submit").click(function () {
         var siteName = $("#site-name").val();
@@ -16,13 +16,13 @@ $(document).ready(function () {
             success: function (data) {
                 data = JSON.parse(data);
                 if (data.status === 200) {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                 } else {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                 }
             },
             error: function () {
-                Materialize.toast("提交失败", 2000);
+                M.toast({html:"提交失败",displayLength:2000});
             }
         })
     });

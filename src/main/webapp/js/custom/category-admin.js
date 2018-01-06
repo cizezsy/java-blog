@@ -42,11 +42,11 @@ $(document).ready(function () {
         editableText.blur(function () {
                 var changedTitle = $(this).val();
                 if (changedTitle.length > 32) {
-                    Materialize.toast("目录名应小于32个字符", 2000);
+                    M.toast({html:"目录名应小于32个字符",displayLength:2000});
                 } else {
                     var viewableText = $("<span>");
                     if (changedTitle.length === 0) {
-                        Materialize.toast("目录名不可为空", 2000);
+                        M.toast({html:"目录名不可为空",displayLength:2000});
                         changedTitle = origin;
                     }
                     if (changedTitle !== origin) {
@@ -59,15 +59,15 @@ $(document).ready(function () {
                             success: function (data) {
                                 data = JSON.parse(data);
                                 if (data.status === 200) {
-                                    Materialize.toast(data.message, 2000);
+                                    M.toast({html:data.message, displayLength:2000});
                                 } else {
                                     viewableText.html(origin);
-                                    Materialize.toast(data.message, 2000);
+                                    M.toast({html:data.message, displayLength:2000});
                                 }
                             },
                             error: function () {
                                 viewableText.html(origin);
-                                Materialize.toast("修改失败", 2000);
+                                M.toast({html:"修改失败",displayLength:2000});
                             }
                         })
                     }
@@ -86,16 +86,16 @@ $(document).ready(function () {
         editableText.blur(function () {
                 var changedOrder = $(this).val();
                 if (!$.isNumeric(changedOrder)) {
-                    Materialize.toast("请输入数字", 2000);
+                    M.toast({html:"请输入数字",displayLength:2000});
                     return;
                 }
 
                 if (changedOrder > 1024) {
-                    Materialize.toast("order值应小于1024", 2000);
+                    M.toast({html:"order值应小于1024",displayLength:2000});
                 } else {
                     var viewableText = $("<span>");
                     if (changedOrder.length === 0) {
-                        Materialize.toast("order值不可为空", 2000);
+                        M.toast({html:"order值不可为空",displayLength:2000});
                         changedOrder = origin;
                     }
                     if (changedOrder !== origin) {
@@ -108,15 +108,15 @@ $(document).ready(function () {
                             success: function (data) {
                                 data = JSON.parse(data);
                                 if (data.status === 200) {
-                                    Materialize.toast(data.message, 2000);
+                                    M.toast({html:data.message, displayLength:2000});
                                 } else {
                                     viewableText.html(origin);
-                                    Materialize.toast(data.message, 2000);
+                                    M.toast({html:data.message, displayLength:2000});
                                 }
                             },
                             error: function () {
                                 viewableText.html(origin);
-                                Materialize.toast("修改失败", 2000);
+                                M.toast({html:"修改失败",displayLength:2000});
                             }
                         })
                     }
@@ -133,19 +133,19 @@ $(document).ready(function () {
         $("#category-desc").val("");
         $("#category-desc").trigger("autoresize");
         $("#category-order").val("");
-        Materialize.updateTextFields();
+        M.updateTextFields();
     }
 
     function submitCategory(categoryId, ele) {
         var title = $("#category-title").val();
         if (title === "") {
-            Materialize.toast("目录名不能为空", 2000);
+            M.toast({html:"目录名不能为空",displayLength:2000});
             return;
         }
         var desc = $("#category-desc").val();
         var order = $("#category-order").val();
         if (!$.isNumeric(order)) {
-            Materialize.toast("顺序必须是数字", 2000);
+            M.toast({html:"顺序必须是数字",displayLength:2000});
             return;
         }
         if (!categoryId) {
@@ -201,16 +201,16 @@ $(document).ready(function () {
                         ele.find(".admin-category-order span").html(order);
                     }
                     $('#category-edit').modal('close');
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                 } else {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                 }
                 $("#category-edit-confirm").unbind("click").click(submitCategory);
             },
             error: function () {
                 clearModal();
                 $("#category-edit-confirm").unbind("click").click(submitCategory);
-                Materialize.toast("提交失败", 2000);
+                M.toast({html:"提交失败",displayLength:2000});
             }
         })
     }
@@ -228,7 +228,7 @@ $(document).ready(function () {
         $("#category-desc").val(parent.find(".admin-category-desc-real").html());
         $("#category-desc").trigger("autoresize");
         $("#category-order").val(parent.find(".admin-category-order span").html());
-        Materialize.updateTextFields();
+        M.updateTextFields();
         $("#category-edit").modal("open");
 
         $("#category-edit-confirm").unbind("click").click(function () {
@@ -248,14 +248,14 @@ $(document).ready(function () {
             success: function (data) {
                 data = JSON.parse(data);
                 if (data.status === 200) {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                     parent.remove();
                 } else {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                 }
             },
             error:function () {
-                Materialize.toast("提交失败", 2000);
+                M.toast({html:"提交失败",displayLength:2000});
             }
         })
     })

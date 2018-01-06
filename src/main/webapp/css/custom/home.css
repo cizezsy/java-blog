@@ -41,4 +41,34 @@
 .article-more {
     font-size: 14px;
     cursor: pointer;
+    color: grey;
+}
+
+.article-item-footer {
+    margin-top: 8px;
+}
+
+
+main {
+    padding-bottom: 10px;
+}
+
+.article-items {
+    background: whitesmoke;
+    padding: 8px;
+    margin-bottom: 50px;
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+main {
+    padding-bottom: 10px;
+}
+
+.article-items {
+    background: whitesmoke;
+    padding: 8px;
+    margin-bottom: 50px;
+    padding-left: 6%;
+    padding-right: 6%;
 }

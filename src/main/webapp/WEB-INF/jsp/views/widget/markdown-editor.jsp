@@ -8,9 +8,9 @@
         <textarea id="markdown-editor-textarea" title="markdown-editor-textarea">
                     </textarea>
     </div>
-    <div id="markdown-preview" class="col m6"></div>
+    <div id="markdown-preview" class="col s6"></div>
 </div>
-<script src="<c:url value="/js/showdown.min.js"/>"></script>
+<script src="http://libs.cdnjs.net/showdown/1.8.0/showdown.min.js"></script>
 <script async="async">
     $(document).ready(function () {
             var converter = new showdown.Converter();

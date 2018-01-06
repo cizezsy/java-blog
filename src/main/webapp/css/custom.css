@@ -1,6 +1,5 @@
 html {
     background-color: #f5f5f5;
-    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
 }
 
 .vertical-center-child {
@@ -37,12 +36,12 @@ html {
     overflow: auto;
 }
 
-header, main, footer {
+main {
     padding-left: 260px;
 }
 
 @media only screen and (max-width: 992px) {
-    header, main, footer {
+    main {
         padding-left: 0;
     }
 }
@@ -110,7 +109,7 @@ header, main, footer {
     display: table-header-group;
 }
 
-.table-header-group .table-cell{
+.table-header-group .table-cell {
     font-weight: 400;
     color: #757575;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -157,13 +156,12 @@ header, main, footer {
     margin-top: 5px;
 }
 
-
 .breadcrumb:before {
     color: #EF5350;
 }
 
 body footer {
-    background-color: whitesmoke!important;
+    background-color: whitesmoke !important;
 }
 
 .stripe-bg {
@@ -226,3 +224,8 @@ body footer {
 .table-row-group .table-cell {
     border: solid #e8dedef2 1px;
 }
+
+.sidenav {
+    width: 240px;
+}
+

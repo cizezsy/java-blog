@@ -5,7 +5,6 @@
 <%@ attribute name="nav" fragment="true" required="true" %>
 <%@ attribute name="footer" fragment="true" required="true" %>
 <%@ include file="/WEB-INF/jsp/base.jsp" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +18,7 @@
 </header>
 <main>
     <jsp:doBody/>
+    <jsp:invoke fragment="footer"/>
 </main>
-<jsp:invoke fragment="footer"/>
 </body>
 </html>

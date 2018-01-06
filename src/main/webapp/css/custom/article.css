@@ -1,0 +1,56 @@
+
+.article-header-content {
+    position: relative;
+}
+
+
+.article-header-content {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    background: hsla(0,0%,100%,.3);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.article-header-content ::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(20px);
+    margin: -30px;
+}
+
+.tag-panel {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px !important;
+}
+
+.tag-panel .chip {
+    flex: initial;
+    cursor: pointer;
+    -webkit-user-select: none;
+}
+
+.tag-panel .chip:hover {
+    cursor: pointer;
+}
+
+.article-content, .pin-scroll #scroll-spy-ul {
+    background: whitesmoke;
+}
+
+.row .article-content {
+    padding: 20px;
+}
+
+.pin-scroll .table-of-contents{
+    padding-left: 5px;
+}
+
+

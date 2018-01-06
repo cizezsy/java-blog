@@ -12,26 +12,24 @@
         <script src="<c:url value="/js/custom/article-admin.js"/>"></script>
         <div class="container">
             <div class="row article-admin-filter valign-wrapper">
-                <div class="col m3">
+                <div class="col s3">
                     <input type="text" class="datepicker" placeholder="起始日期（默认无）" id="startDatePicker">
                 </div>
-                <div class="col m3">
+                <div class="col s3">
                     <input type="text" class="datepicker" placeholder="截至日期（默认今日）" id="endDatePicker">
                 </div>
-                <div class="input-field col m3">
+                <div class="input-field col s3">
                     <select multiple class="category-filter-select" id="category-filter-select">
                         <option value="all" selected>所有目录</option>
                         <c:forEach items="${categories}" var="category">
                             <option value="${category.categoryId}"
                                     class="red-text lighten-text-2">${category.categoryTitle}</option>
                         </c:forEach>
-
+                        <label>目录</label>
                     </select>
                 </div>
                 <div class="right">
-                    <button class="btn article-filter-btn">
-                        筛选
-                    </button>
+                    <button class="btn article-filter-btn">筛选</button>
                 </div>
             </div>
             <div class="table z-depth-1 white clearfix">
@@ -70,7 +68,7 @@
                     <c:forEach items="${articles}" var="article">
                         <div class="table-row">
                             <div class="table-cell article-admin-title">
-                                ${article.articleTitle}
+                            <span class="truncate">${article.articleTitle}</span>
                             </div>
                             <div class="table-cell">
                                 <span>${article.user.userName}</span>

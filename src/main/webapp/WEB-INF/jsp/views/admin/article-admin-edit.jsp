@@ -1,7 +1,7 @@
 <template:admin title="文章编辑"
                 breadcrumpItems="${['仪表盘','文章管理','文章编辑']}"><%--@elvariable id="article" type="me.cizezsy.domain.Article"--%>
-    <script src="<c:url value="/js/showdown.min.js"/>"></script>
-    <script src="<c:url value="/js/highlight.pack.js"/>"></script>
+    <script src="http://libs.cdnjs.net/showdown/1.8.0/showdown.min.js"></script>
+    <script src="http://libs.cdnjs.net/highlight.js/9.9.0/highlight.min.js"></script>
     <script async="async">
 
         $(document).ready(function () {
@@ -17,8 +17,6 @@
             converter.setOption("strikethrough", true);
             converter.setOption("tables", true);
             converter.setOption("ghCodeBlocks ", true);
-            //converter.setOption('emoji', true);
-            //converter.setOption("ghCompatibleHeaderId", true);
             converter.setOption("customizedHeaderId", true);
             converter.setOption("simpleLineBreaks", true);
 
@@ -33,7 +31,7 @@
                 startingTop: '2%',
                 endingTop: '5%',
                 ready: function () {
-                    Materialize.toast('ESC键退出', 2000, 'rounded');
+                    M.toast({html:'ESC键退出', displayLength:2000, class:'rounded'});
                     $('html').on("keyup.modals", function (e) {
                         if (e.keyCode !== 27) {
                             return false;
@@ -133,7 +131,7 @@
                         },
                         success: submitResult,
                         error: function () {
-                            Materialize.toast("保存失败", 2000, 'rounded');
+                            M.toast({html:'保存失败', displayLength:2000, class:'rounded'});
                         }
                     }
                 )
@@ -142,9 +140,9 @@
             function submitResult(result) {
                 if (result.status === 200) {
                     $("#article-id").val(result.message);
-                    Materialize.toast("保存成功", 2000, 'rounded');
+                    M.toast({html:'保存成功', displayLength:2000, class:'rounded'});
                 } else {
-                    Materialize.toast(result.message, 2000, 'rounded');
+                    M.toast({html:result.message, displayLength:2000, class:'rounded'});
                 }
             }
         });
@@ -174,7 +172,7 @@
             <textarea id="markdown-editor-textarea" class="markdown-editor-textarea" title="markdown-editor-textarea"
                       placeholder="请输入markdown">${cf:htmlUnescape(article.articleRawContent)}</textarea>
         </div>
-        <div id="markdown-preview" class="markdown-preview col m6">${article.articleContent}</div>
+        <div id="markdown-preview" class="markdown-preview col s6">${article.articleContent}</div>
     </div>
 
     <div class="fixed-action-btn">
@@ -206,7 +204,7 @@
                       placeholder="请输入markdown">
             </textarea>
             </div>
-            <div id="markdown-preview-modal" class="markdown-preview col m6"></div>
+            <div id="markdown-preview-modal" class="markdown-preview col s6"></div>
         </div>
     </div>
 </template:admin>

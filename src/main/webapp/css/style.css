@@ -49,7 +49,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 
-.side-nav .user-view .circle {
+.sidenav .user-view .circle {
     height: 150px;
     width: 150px;
 }
@@ -71,7 +71,4 @@ textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: none!important;
 }
 
-.side-nav {
-    width: 260px!important;
-}
 

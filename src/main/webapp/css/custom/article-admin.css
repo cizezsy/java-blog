@@ -74,3 +74,11 @@
 .table-cell {
     white-space: nowrap;
 }
+
+.article-admin-title span {
+    width: 200px;
+}
+
+.input-field {
+    margin-bottom: 0;
+}

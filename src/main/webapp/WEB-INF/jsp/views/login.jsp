@@ -17,7 +17,7 @@
                     location.href = data.message
                 } else {
                     var $toastContent = $('<span>' + data.message + '</span>').add($('<button class="btn-flat toast-action toastCancelBtn">确定</button>'));
-                    Materialize.toast($toastContent, 5000);
+                    M.toast({html:$toastContent, displayLength:5000});
                     $('.toastCancelBtn').click(function () {
                         var toastElement = $(this).parent()[0];
                         var toastInstance = toastElement.M_Toast;

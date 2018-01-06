@@ -10,21 +10,27 @@
     </jsp:attribute>
     <jsp:body>
         <style>
-            .article-header, .article-header-content ::before {
+            main, .article-header-content ::before {
                 background: url("${backgroundImg}") 0 / cover fixed;
             }
+
+            main {
+                padding-bottom: 10px;
+            }
+
         </style>
         <link href="<c:url value="/css/custom/home.css"/>" type="text/css" rel="stylesheet"/>
         <script src="<c:url value="/js/custom/home.js"/>"></script>
+        <script src="<c:url value="/js/color-adapt.js"/>"></script>
         <div class="article-header valign-wrapper center-align">
             <div class="article-header-content">
                 <h4 class="white-text">${site.siteMotto}</h4>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <c:forEach var="article" items="${articleList}">
-                    <div class="scrollspy section article-item-section">
+        <div class="container article-items z-depth-2">
+            <c:forEach var="article" items="${articleList}">
+                <div class="row">
+                    <div class="section article-item-section">
                         <h4>
                             <a class="color-scheme-strongest-text"
                                href="<c:url value="/article/detail?articleId=${article.articleId}"/>">${article.articleTitle}</a>
@@ -32,7 +38,7 @@
                         <c:choose>
                             <c:when test="${article.articleAbstract eq null or article.articleAbstract eq ''}">
                                 <div class="article-abstract">
-                                        ${article.articleContent}
+                                        ${cf:abstractGenerate(article.articleContent)}
                                 </div>
                             </c:when>
                             <c:otherwise>
@@ -41,15 +47,17 @@
                                 </div>
                             </c:otherwise>
                         </c:choose>
-                        <div class="left article-more valign-wrapper">
-                            <span>查看更多</span><i class="material-icons">arrow_drop_down</i>
+                        <div class="article-item-footer">
+                            <div class="left article-more valign-wrapper">
+                                <span>查看更多</span><i class="material-icons">arrow_drop_down</i>
+                            </div>
+                            <time class="right article-time">
+                                    ${cf:formatLocalDateTime(article.createTime, 'yyyy-MM-dd')}
+                            </time>
                         </div>
-                        <time class="right article-time">
-                                ${cf:formatLocalDateTime(article.createTime, 'yyyy-MM-dd')}
-                        </time>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+            </c:forEach>
         </div>
         <img src="<c:url value="${backgroundImg}"/>" class="color-thief-target" style="display: none">
     </jsp:body>

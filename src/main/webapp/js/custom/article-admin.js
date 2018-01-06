@@ -1,16 +1,9 @@
 $(document).ready(function () {
 
-    $('select').material_select();
+    $('select').select();
 
 
-    $('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year,
-        today: '今天',
-        clear: '清除',
-        close: '确定',
-        closeOnSelect: false // Close upon selecting a date,
-    });
+    $('.datepicker').datepicker();
 
     $(".add-article").click(function () {
         location.href = "/admin/article/edit";
@@ -30,15 +23,15 @@ $(document).ready(function () {
             success: function (data) {
                 data = JSON.parse(data);
                 if (data.status === 200) {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                     var b = ele.find(".admin-article-action-is-top-box");
                     b.checked = !b.checked;
                 } else {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                 }
             },
             error: function () {
-                Materialize.toast("设置失败", 2000);
+                M.toast({html:"设置失败",displayLength:2000});
             }
         });
     });
@@ -54,15 +47,15 @@ $(document).ready(function () {
             success: function (data) {
                 data = JSON.parse(data);
                 if (data.status === 200) {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                     var b = ele.find(".admin-article-action-is-top-box");
                     b.checked = !b.checked;
                 } else {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                 }
             },
             error: function () {
-                Materialize.toast("设置失败", 2000)
+                M.toast({html:"设置失败",displayLength:2000});
             }
         });
     });
@@ -78,14 +71,14 @@ $(document).ready(function () {
             success: function (data) {
                 data = JSON.parse(data);
                 if (data.status === 200) {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                     ele.parent().parent().remove();
                 } else {
-                    Materialize.toast(data.message, 2000);
+                    M.toast({html:data.message, displayLength:2000});
                 }
             },
             error: function () {
-                Materialize.toast("删除失败", 2000)
+                M.toast({html:"删除失败",displayLength:2000});
             }
         })
     });
@@ -109,9 +102,9 @@ $(document).ready(function () {
         } else {
             var categoryName = $('.create-category-input').val();
             if (categoryName.length > 32) {
-                Materialize.toast("目录名应小于32个字符", 2000);
+                M.toast({html:"目录名应小于32个字符",displayLength:2000});
             } else if (categoryName.length === 0) {
-                Materialize.toast("目录名不可为空", 2000);
+                M.toast({html:"目录名不可为空",displayLength:2000});
             } else {
                 $.post({
                     method: 'post',
@@ -132,13 +125,13 @@ $(document).ready(function () {
                             $(".article-category-select").append(option).material_select();
                             $(".category-filter-select").material_select("destroy");
                             $(".category-filter-select").append(option).material_select();
-                            Materialize.toast("创建成功", 2000);
+                            M.toast({html:"创建成功",displayLength:2000});
                         } else {
-                            Materialize.toast(data.message, 2000);
+                            M.toast({html:data.message, displayLength:2000});
                         }
                     },
                     error: function () {
-                        Materialize.toast("删除失败", 2000)
+                        M.toast({html:"删除失败",displayLength:2000});
                     }
                 });
                 createCategory.hide();
@@ -175,13 +168,13 @@ $(document).ready(function () {
                 success: function (data) {
                     data = JSON.parse(data);
                     if (data.status === 200) {
-                        Materialize.toast(data.message, 2000);
+                        M.toast({html:data.message, displayLength:2000});
                     } else {
-                        Materialize.toast(data.message, 2000);
+                        M.toast({html:data.message, displayLength:2000});
                     }
                 },
                 error: function () {
-                    Materialize.toast("更改目录失败", 2000)
+                    M.toast({html:"更改目录失败",displayLength:2000});
                 }
             });
         }

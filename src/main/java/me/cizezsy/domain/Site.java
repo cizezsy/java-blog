@@ -20,6 +20,9 @@ public class Site extends BaseDomain {
     @Column(name = "site_bg")
     private String siteBg;
 
+    @Column(name = "site_user_img")
+    private String siteUserImg;
+
     public String getSiteName() {
         return siteName;
     }
@@ -58,5 +61,13 @@ public class Site extends BaseDomain {
 
     public void setSiteId(int siteId) {
         this.siteId = siteId;
+    }
+
+    public String getSiteUserImg() {
+        return siteUserImg;
+    }
+
+    public void setSiteUserImg(String siteUserImg) {
+        this.siteUserImg = siteUserImg;
     }
 }

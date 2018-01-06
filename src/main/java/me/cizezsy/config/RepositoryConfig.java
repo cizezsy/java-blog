@@ -8,6 +8,8 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.servlet.annotation.MultipartConfig;
+
 @Configuration
 @ImportResource(value = "classpath:repository-config.xml")
 @ComponentScan(basePackages = "me.cizezsy.dao")

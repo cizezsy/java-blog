@@ -1,6 +1,8 @@
 <script>
     $(document).ready(function () {
-        var index = $(".side-nav a:contains(" + $(".admin-header div h4").text() + ")").toggleClass("red lighten-2 white-text").parents(".collapsible > li").index();
+        var index = $(".sidenav a:contains(" + $(".admin-header div h4").text() + ")").toggleClass("red lighten-2 white-text").parents(".collapsible > li").index();
+        $('.sidenav').sidenav();
+        $('.collapsible').collapsible();
         $(".collapsible").collapsible("open", index);
     })
 </script>
@@ -15,15 +17,15 @@
         letter-spacing: 2px;
     }
 </style>
-<ul id="side-out" class="side-nav fixed z-depth-2">
+<ul id="side-out" class="sidenav sidenav-fixed z-depth-2">
     <li>
         <a href="javascript:void(0)" class="white-text red lighten-2 stripe-bg z-depth-1 driver-panel no-hover">仪表盘</a>
     </li>
+    <li style="font-weight: bold">
+        <a class="waves-effect collapsible-header" href="#">站点信息</a>
+    </li>
     <li class="no-padding">
-        <ul class="collapsible">
-            <li style="font-weight: bold">
-                <a class="waves-effect collapsible-header" href="#">站点信息</a>
-            </li>
+        <ul class="collapsible collapsible-accordion">
             <li style="font-weight: bold">
                 <a class="waves-effect collapsible-header">文章管理</a>
                 <div class="collapsible-body">

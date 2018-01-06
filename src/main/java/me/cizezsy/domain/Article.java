@@ -47,6 +47,9 @@ public class Article extends BaseDomain implements Comparable<Article> {
     @Column(name = "is_publish")
     private Boolean isPublish;
 
+    @Column(name="article_bg_url")
+    private String articleBgUrl;
+
     @Fetch(FetchMode.SELECT)
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "blog_article_tag",
@@ -85,6 +88,14 @@ public class Article extends BaseDomain implements Comparable<Article> {
 
     public void setArticleAbstract(String articleAbstract) {
         this.articleAbstract = articleAbstract;
+    }
+
+    public String getArticleBgUrl() {
+        return articleBgUrl;
+    }
+
+    public void setArticleBgUrl(String articleBgUrl) {
+        this.articleBgUrl = articleBgUrl;
     }
 
     public LocalDateTime getCreateTime() {

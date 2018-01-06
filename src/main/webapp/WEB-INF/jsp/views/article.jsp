@@ -1,61 +1,21 @@
 <%--@elvariable id="article" type="me.cizezsy.domain.Article"--%>
 <template:main htmlTitle="${article.articleTitle}">
     <jsp:attribute name="nav">
-        <c:set var="backgroundImg" value="/image/pexels-photo-424163.jpeg" scope="request"/>
+        <c:set var="backgroundImg" value="${article.articleBgUrl}" scope="request"/>
         <%@include file="widget/front-nav.jsp" %>
     </jsp:attribute>
     <jsp:attribute name="footer">
         <%@include file="widget/front-footer.jsp" %>
     </jsp:attribute>
     <jsp:body>
-        <script src="<c:url value="/js/highlight.pack.js"/>"></script>
+        <link href="<c:url value="/css/custom/article.css"/>" type="text/css" rel="stylesheet"/>
+        <script src="<c:url value="/js/color-adapt.js"/>"></script>
+        <script src="http://libs.cdnjs.net/highlight.js/9.9.0/highlight.min.js"></script>
         <style>
-            .article-header-content {
-                position: relative;
-            }
-
-            .article-header, .article-header-content ::before {
-                background: url("/image/pexels-photo-424163.jpeg") 0 / cover fixed;
-            }
-
-            .article-header-content {
-                width: 80%;
-                margin: 0 auto;
-                position: relative;
-                background: hsla(0,0%,100%,.3);
-                overflow: hidden;
-                z-index: 1;
-            }
-
-            .article-header-content ::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                z-index: -1;
-                filter: blur(20px);
-                margin: -30px;
-            }
-
-            .tag-panel {
-                display: flex;
-                flex-wrap: wrap;
-                padding: 5px !important;
-            }
-
-            .tag-panel .chip {
-                flex: initial;
-                cursor: pointer;
-                -webkit-user-select: none;
-            }
-
-            .tag-panel .chip:hover {
-                cursor: pointer;
+            main, .article-header-content ::before {
+                background: url("${article.articleBgUrl}") 0 / cover fixed;
             }
         </style>
-        <%--TODO 此处url以后改成动态--%>
         <div class="article-header valign-wrapper">
             <div class="container article-header-content">
                 <div class="article-header-title">
@@ -68,10 +28,8 @@
         </div>
         <div class="container clearfix">
             <div class="row">
-                <div class="col s12 m10 article-content">
-                    <div>
-                            ${article.articleContent}
-                    </div>
+                <div class="col s12 m10 article-content z-depth-2 hoverable">
+                    <div>${article.articleContent}</div>
                     <hr>
                     <div class="article-info valign-wrapper right">
                         <img class="icon-block" src="<c:url value="/image/ic_time.png"/>">
@@ -94,52 +52,13 @@
                                 </div>
                             </c:forEach>
                         </div>
-                        <ul class="section table-of-contents" id="scroll-spy-ul">
-
+                        <ul class="section table-of-contents z-depth-2 hoverable" id="scroll-spy-ul">
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-            $(document).ready(function () {
-
-                $(document).ready(function () {
-                    $('.scrollspy').scrollSpy();
-                });
-                var set = false;
-                var width;
-                $(window).scroll(function () {
-                    var scrollTop = $(window).scrollTop();
-                    var scrollSpyNav = $('#pin-scroll');
-                    if (scrollTop < 400) {
-                        if(!set) {
-                            width =scrollSpyNav.width();
-                            set = true;
-                        }
-                        scrollSpyNav.removeClass("pinned");
-                        return;
-                    }
-                    if (scrollTop + 42 >= scrollSpyNav.offset().top) {
-                        if(set) {
-                            scrollSpyNav.width(width);
-                            set = false;
-                        }
-                        scrollSpyNav.addClass('pinned');
-                    }
-                });
-
-                $(".article-content h5").each(function () {
-                    var ele = $(this);
-                    var idValue = ele.attr("id");
-                    $("<li/>").append($("<a>", {
-                        href:"#"+idValue,
-                        text: ele.text()
-                    })).appendTo("#scroll-spy-ul")
-                });
-                $(".article-content h5").scrollSpy();
-            })
-        </script>
+        <script src="<c:url value="/js/custom/article.js"/>"></script>
         <img src="<c:url value="${backgroundImg}"/>" class="color-thief-target" style="display: none">
     </jsp:body>
 </template:main>
