@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<Configure id="wac" class="org.eclipse.jetty.webapp.WebAppContext">
+    <New id="blog" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>jdbc/blog</Arg>
+        <Arg>
+            <New class="org.apache.commons.dbcp.BasicDataSource">
+                <Set name="driverClassName">com.mysql.jdbc.Driver</Set>
+                <Set name="url">jdbc:mysql://localhost:3306/blog?useUnicode=true&amp;characterEncoding=UTF-8</Set>
+                <Set name="username">root</Set>
+                <Set name="password">root</Set>
+            </New>
+        </Arg>
+    </New>
+</Configure>

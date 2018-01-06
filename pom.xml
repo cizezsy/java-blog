@@ -188,7 +188,21 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.5.v20170502</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>commons-dbcp</groupId>
+                        <artifactId>commons-dbcp</artifactId>
+                        <version>${commons-dbcp.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql-connector-java.version}</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <jettyXml>src/main/webapp/WEB-INF/jetty-env.xml</jettyXml>
                 </configuration>
             </plugin>
         </plugins>

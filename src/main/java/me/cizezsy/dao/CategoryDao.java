@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CategoryDao extends BaseDao<Category> {
 
-    public CategoryDao() {
-        super(Category.class);
-    }
+  public CategoryDao() {
+    super(Category.class);
+  }
 
 
 }

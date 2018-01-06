@@ -6,5 +6,5 @@ $(document).ready(function () {
     }).click(function () {
         var parent = $(this).parents(".article-item-section").find(".color-scheme-strongest-text");
         window.location.href = parent.attr("href")
-    })
+    });
 });

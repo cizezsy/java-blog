@@ -1,5 +1,8 @@
 package me.cizezsy.security;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.cizezsy.dao.UserDao;
 import me.cizezsy.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,30 +13,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Component
 public class BlogUserDetailsService implements UserDetailsService {
 
-    private UserDao userDao;
+  private UserDao userDao;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.getUserByName(username);
-        if (user == null)
-            throw new UsernameNotFoundException(username + " not found");
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        return new org.springframework.security.core.userdetails.User(
-                user.getUserName(),
-                user.getPassword(),
-                authorities
-        );
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    User user = userDao.getUserByName(username);
+    if (user == null) {
+      throw new UsernameNotFoundException(username + " not found");
     }
+    List<GrantedAuthority> authorities = new ArrayList<>();
+    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+    return new org.springframework.security.core.userdetails.User(
+        user.getUserName(),
+        user.getPassword(),
+        authorities
+    );
+  }
 
-    @Autowired
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
+  @Autowired
+  public void setUserDao(UserDao userDao) {
+    this.userDao = userDao;
+  }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 
 @Configuration
 @ComponentScan(basePackages = {"me.cizezsy"},
-        excludeFilters = @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION))
+    excludeFilters = @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION))
 public class RootConfig {
 
 }

@@ -5,6 +5,9 @@
     <script async="async">
 
         $(document).ready(function () {
+            $('.fixed-action-btn').floatingActionButton();
+            $('.tooltipped').tooltip();
+
             var converter = new showdown.Converter();
             var preview = $("#markdown-preview");
             var editorArea = $("#markdown-editor-textarea");
@@ -26,11 +29,11 @@
                 markdownEditorDiv.height($(window).height() - markdownEditorDiv.offset().top - 10);
             }
 
-            $('.modal').modal({
+            $('#modal1').modal({
                 dismissible: false,
                 startingTop: '2%',
                 endingTop: '5%',
-                ready: function () {
+                onOpenStart: function () {
                     M.toast({html:'ESC键退出', displayLength:2000, class:'rounded'});
                     $('html').on("keyup.modals", function (e) {
                         if (e.keyCode !== 27) {
@@ -40,6 +43,10 @@
                         $(this).off("keyup.modals")
                     });
                 }
+            });
+
+            $("#modal-background-img").modal({
+
             });
 
             heightAdapt();
@@ -115,6 +122,7 @@
                 var articleContent = $("#markdown-preview").html();
                 var articleRawContent = $("#markdown-editor-textarea").val();
                 var articleId = $("#article-id").val();
+                var articleBgUrl = $("#article-background-img").val();
                 var tag = [];
                 $(".chip .tag").each(function () {
                     tag.push($(this).val());
@@ -127,7 +135,8 @@
                             'articleTitle': articleTitle,
                             'articleContent': articleContent,
                             'tag': tag.join(','),
-                            'articleRawContent': articleRawContent
+                            'articleRawContent': articleRawContent,
+                            'articleBgUrl':articleBgUrl
                         },
                         success: submitResult,
                         error: function () {
@@ -142,7 +151,9 @@
                     $("#article-id").val(result.message);
                     M.toast({html:'保存成功', displayLength:2000, class:'rounded'});
                 } else {
-                    M.toast({html:result.message, displayLength:2000, class:'rounded'});
+                    M.toast({html:'保存成功', displayLength:2000, class:'rounded'});
+
+                    M.toast(result.message, 2000, 'rounded');
                 }
             }
         });
@@ -181,8 +192,8 @@
         </a>
         <ul>
             <li>
-                <a class="btn-floating green tooltipped" data-position="left"
-                   data-delay="50" data-tooltip="背景图片url"><i class="material-icons" id="bg-img">image</i></a>
+                <a class="btn-floating green tooltipped modal-trigger" data-position="left" href="#modal-background-img"
+                   data-delay="50" data-tooltip="背景图片"><i class="material-icons" id="bg-img">image</i></a>
             </li>
             <li>
                 <a class="btn-floating blue modal-trigger tooltipped" href="#modal1" data-position="left"
@@ -205,6 +216,19 @@
             </textarea>
             </div>
             <div id="markdown-preview-modal" class="markdown-preview col s6"></div>
+        </div>
+    </div>
+
+    <div id="modal-background-img" class="modal">
+        <div class="modal-content">
+            <p>请输入图片地址</p>
+            <div class="input-field col s6">
+                <input placeholder="URL" id="article-background-img" type="text" class="validate" maxlength="512" value="${article.articleBgUrl}">
+                <label for="article-background-img"></label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-flat" id="background-img-confirm">确定</a>
         </div>
     </div>
 </template:admin>

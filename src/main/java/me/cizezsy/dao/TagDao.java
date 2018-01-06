@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TagDao extends BaseDao<Tag> {
 
-    public TagDao() {
-        super(Tag.class);
-    }
+  public TagDao() {
+    super(Tag.class);
+  }
 }

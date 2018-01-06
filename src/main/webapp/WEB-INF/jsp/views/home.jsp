@@ -11,7 +11,7 @@
     <jsp:body>
         <style>
             main, .article-header-content ::before {
-                background: url("${backgroundImg}") 0 / cover fixed;
+                background: url("<c:url value="${site.siteBg}"/>") 0 / cover fixed;
             }
 
             main {

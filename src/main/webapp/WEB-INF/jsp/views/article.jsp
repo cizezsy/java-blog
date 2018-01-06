@@ -13,7 +13,7 @@
         <script src="http://libs.cdnjs.net/highlight.js/9.9.0/highlight.min.js"></script>
         <style>
             main, .article-header-content ::before {
-                background: url("${article.articleBgUrl}") 0 / cover fixed;
+                background: url("<c:url value="${article.articleBgUrl}"/>") 0 / cover fixed;
             }
         </style>
         <div class="article-header valign-wrapper">
@@ -21,8 +21,8 @@
                 <div class="article-header-title">
                     <h3 class="white-text">${article.articleTitle}</h3>
                 </div>
-                <div class="article-header-info"><h6 class="grey-text text-lighten-3">create
-                    on ${cf:formatLocalDateTime(article.createTime, "yyyy MM dd ")}</h6>
+                <div class="article-header-info">
+                    <h6 class="grey-text text-lighten-3">create on ${cf:formatLocalDateTime(article.createTime, "yyyy MM dd ")}</h6>
                 </div>
             </div>
         </div>

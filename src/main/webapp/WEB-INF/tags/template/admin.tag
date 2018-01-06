@@ -12,7 +12,7 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        
+        <link href="<c:url value="/css/custom/admin.css"/>" type="text/css" rel="stylesheet"/>
         <script>
             $(document).ready(function () {
                 $(".admin-header-home-btn").hover(function () {

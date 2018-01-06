@@ -16,22 +16,23 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = "me.cizezsy.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver("/WEB-INF/jsp/views/", ".jsp");
-        registry.viewResolver(resolver);
-    }
+  @Override
+  public void configureViewResolvers(ViewResolverRegistry registry) {
+    InternalResourceViewResolver resolver =
+        new InternalResourceViewResolver("/WEB-INF/jsp/views/", ".jsp");
+    registry.viewResolver(resolver);
+  }
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
+  @Override
+  public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+    configurer.enable();
+  }
 
-    @Bean
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setDefaultEncoding("utf-8");
-        return resolver;
-    }
+  @Bean
+  public MultipartResolver multipartResolver() {
+    CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+    resolver.setDefaultEncoding("utf-8");
+    return resolver;
+  }
 
 }
