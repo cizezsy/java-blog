@@ -2,7 +2,9 @@ package me.cizezsy.service;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import me.cizezsy.dao.ArticleDao;
@@ -84,6 +86,13 @@ public class ArticleService {
 
   public List<Article> queryByDate(LocalDateTime start, LocalDateTime end) {
     return articleDao.findByDateRestrict(start, end);
+  }
+
+
+  public List<Article> findAllPublishByPage(int firstSize, int maxSize) {
+    Map<String, Object> parameters = new HashMap<>();
+    parameters.put("isPublish", true);
+    return articleDao.findAllByPage(firstSize, maxSize, parameters);
   }
 
   @Transactional

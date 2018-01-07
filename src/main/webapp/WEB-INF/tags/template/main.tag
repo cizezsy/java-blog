@@ -10,6 +10,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <%@ include file="/WEB-INF/jsp/component/default-css-and-js.jsp" %>
+    <link rel="icon" href="<c:url value="/image/favicon.png"/>">
     <title><c:out value="${htmlTitle}"/></title>
 </head>
 <body class="color-scheme-lighten">

@@ -1,13 +1,13 @@
 package me.cizezsy.dao;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 public class BaseDao<T> {
   private Class<T> entityClass;
@@ -53,8 +53,13 @@ public class BaseDao<T> {
     getHibernateTemplate().update(entity);
   }
 
+  @SuppressWarnings("unchecked")
   public List<T> findByCriteria(DetachedCriteria criteria) {
     return (List<T>) getHibernateTemplate().findByCriteria(criteria);
+  }
+  @SuppressWarnings("unchecked")
+  public List<T> findByCriteria(DetachedCriteria criteria, int first, int max) {
+    return (List<T>) getHibernateTemplate().findByCriteria(criteria, first, max);
   }
 
   @Autowired

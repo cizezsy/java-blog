@@ -51,8 +51,28 @@
         align-self: flex-end;
     }
 
+    .sidenav-header h4 {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+    }
 
+    .subheader {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 </style>
+<script>
+    $(document).ready(function () {
+        $(".sidenav-header").click(function () {
+            window.location.href = "<c:url value="/"/>"
+        })
+    })
+</script>
 <div id="side-out" class="sidenav sidenav-fixed z-depth-2">
     <div id="particles-js">
         <div class="sidenav-header">

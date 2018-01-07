@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping({"/home", "/"})
+@RequestMapping( {"/home", "/"})
 public class HomeController {
 
   private ArticleService articleService;
@@ -28,10 +28,9 @@ public class HomeController {
   private SiteService siteService;
 
   @RequestMapping(method = RequestMethod.GET)
-  public String home(Model model, Article article) {
-    article.setPublish(true);
+  public String home(Model model) {
     List<Article> articleList =
-        articleService.findArticleList(article, WebConstant.DEFAULT_PAGE_START, WebConstant.DEFAULT_PAGE_LIMIT);
+        articleService.findAllPublishByPage(WebConstant.DEFAULT_PAGE_START, WebConstant.DEFAULT_PAGE_LIMIT);
     List<Category> categoryList = categoryService.findAllCategory();
     categoryList.sort(Comparator.comparingInt(Category::getCategoryOrder));
 
